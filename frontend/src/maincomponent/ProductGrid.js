@@ -164,7 +164,7 @@ const ProductCard = React.memo(({ product, index, hoveredIndex, setHoveredIndex,
           />
         </LazyLoad>
 
-        <div className="likeiconbtn" onClick={(e) => { e.stopPropagation(); handleLikeClick(product._id); }}>
+        <div className="likeiconbtn" onClick={(e) => { e.stopPropagation();}}>
           <FavoriteIcon className={`like-icon ${likedProducts.has(product._id) ? 'liked' : ''}`} />
         </div>
 

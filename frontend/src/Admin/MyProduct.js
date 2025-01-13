@@ -90,7 +90,7 @@ const MyProduct = () => {
       alert('Product updated successfully');
       setEditingProduct(null);
       setIsPopupOpen(false);
-      fetchProducts(); // Refresh the product list
+      // fetchProducts(); 
     } catch (error) {
       console.error('Error updating product:', error);
       alert('Failed to update product');
