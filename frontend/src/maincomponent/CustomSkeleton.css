@@ -1,0 +1,19 @@
+.custom-skeleton {
+    padding: 20px;
+    background-color: #eee;
+    border-radius: 8px;
+  }
+  
+  .skeleton-image {
+    height: 150px;
+    background-color: #ddd;
+    border-radius: 8px;
+  }
+  
+  .skeleton-text {
+    height: 20px;
+    background-color: #ddd;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  

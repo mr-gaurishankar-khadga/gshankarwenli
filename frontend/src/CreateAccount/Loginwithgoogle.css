@@ -1,0 +1,25 @@
+
+  
+  .google-login-btn {
+    margin-top: 20px; /* Add space above the button */
+    transition: transform 0.3s, box-shadow 0.3s; /* Animation for hover */
+  }
+  
+  .google-button {
+    background-color: white; /* Set background color */
+    border: 2px solid black; /* Border styling */
+    border-radius: 30px; /* Rounded corners */
+    padding: 10px 20px; /* Padding for button */
+    color: black; /* Text color */
+    font-weight: bold; /* Bold text */
+  }
+  
+  .google-button:hover {
+    transform: translateY(-5px); /* Move button up on hover */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3); /* Add shadow effect */
+  }
+  
+  .user-details {
+    text-align: center; /* Center the user details */
+  }
+  

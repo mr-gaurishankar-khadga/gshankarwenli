@@ -1,0 +1,213 @@
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw; /* Ensure the width covers the full viewport */
+    background-repeat: no-repeat;
+    background-size: cover; /* Scale the image to cover the entire background */
+    background-position: center; /* Center the image */
+    /* background-image: url('./images/loginback.webp'); */
+}
+
+
+.phone-frame {
+    width: 400px;
+    height: 540px;
+    border: 2px solid #e0e0e0;
+    background-color: #ffffff;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px;
+    overflow: hidden;
+    position: relative;
+    animation: slideInFromBottom 1s ease-out forwards;
+    margin-top: -20px;
+}
+
+@keyframes slideInFromBottom {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+
+
+
+/* Container for login form content */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    opacity: 0;
+    animation: fadeIn 1.5s ease-in-out forwards;
+    padding: 20px;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+
+
+.animated-logo {
+    animation: bounce 2s infinite;
+    height: 30%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.information {
+    justify-content: center;
+}
+
+.animated {
+    font-size: 20px;
+    animation: slideIn 1s ease-in-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.subheading {
+    color: #888;
+    margin-bottom: 2rem;
+}
+
+.animated-subheading {
+    animation: slideIn 1.2s ease-in-out forwards;
+}
+
+.input-field {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding-right: 30px;
+    /* background-color: red; */
+}
+
+.animated-input {
+    animation: fadeInUp 1.4s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.login-container input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 30px;
+    background-color: #f9f9f9;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    padding-left: 20px;
+    outline: none;
+}
+
+.login-container input:focus {
+    border-color: #fdd835;
+    box-shadow: 0 4px 15px rgba(253, 216, 53, 0.3);
+}
+
+.visibility-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #888;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.visibility-icon:hover {
+    color: #333;
+}
+
+.login-button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 30px;
+    background-color: #fdd835;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(253, 216, 53, 0.4);
+}
+
+.animated-button {
+    animation: slideIn 1.6s ease-in-out forwards;
+}
+
+.login-button:hover {
+    background-color: #ffc107;
+    box-shadow: 0 12px 30px rgba(253, 216, 53, 0.6);
+    transform: translateY(-2px);
+}
+
+.forgot-password, .register {
+    font-size: 0.85rem;
+    color: #888;
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.forgot-password:hover, .register a:hover {
+    color: #ffc107;
+}
+
+.animated-text {
+    animation: fadeInUp 2s ease-in-out forwards;
+}
+
+a {
+    color: #fdd835;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #ffc107;
+}

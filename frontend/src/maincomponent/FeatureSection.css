@@ -1,0 +1,35 @@
+.feature-card {
+    display: flex;
+    align-items: center;
+    padding: 20px 5px 20px 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    width: 215px;
+    max-width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: -10px;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .feature-avatar {
+    background-color: rgb(233, 233, 233);
+    margin-right: 25px;
+    animation: glow 1.5s infinite alternate;
+  }
+
+  
+  
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 5px #89fea2, 0 0 5px #17e346;
+    }
+    100% {
+      box-shadow: 0 0 10px #41ef8d, 0 0 20px #17e346;
+    }
+  }
+  

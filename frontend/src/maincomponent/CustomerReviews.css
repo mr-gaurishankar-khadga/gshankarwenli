@@ -1,0 +1,87 @@
+
+.customer-reviews {
+    text-align: center;
+    padding: 30px;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+  }
+  
+  .customer-reviews-heading {
+    font-size: 24px;
+    margin-bottom: 50px;
+    color: #333;
+  }
+  
+
+  .customer-reviews-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    flex-wrap: wrap;
+  }
+  
+  .rating-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .stars {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .star {
+    font-size: 24px;    
+    color: #00b8b8;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .star:hover {
+    transform: scale(1.1);
+
+  }
+  
+  .review-prompt {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .cancel-button {
+    background-color: #00b8b8;
+    color: #fff;
+    border: none;
+    padding: 10px 70px;
+    border-radius: 1px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .cancel-button:hover {
+    background-color: #008888;
+  }
+
+
+.message-box-review {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  @media (max-width: 768px) {
+    .customer-reviews-content {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .cancel-button {
+      width: 100%;
+      padding: 12px;
+    }
+  }
+  

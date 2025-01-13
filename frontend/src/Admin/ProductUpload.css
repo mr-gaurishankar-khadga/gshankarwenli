@@ -1,0 +1,168 @@
+/* Container and Form Styling */
+.styled-product-uploader {
+  background: linear-gradient(135deg, #f0f0f0, #ffffff);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 40px auto;
+  font-family: 'Poppins', sans-serif;
+  animation: fadeIn 0.8s ease;
+  padding-right: 70px;
+}
+
+
+.styled-product-uploader h1 {
+  font-size: 2.5em;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  animation: fadeInDown 0.8s ease, gradientMove 3s infinite;
+}
+
+/* Input Fields */
+.styled-animated-input label {
+  font-weight: 600;
+  background: linear-gradient(90deg, #ff6a95, #ffcc70);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: block;
+  margin-bottom: 10px;
+  animation: gradientMove 3s infinite, fadeInLeft 0.8s ease;
+}
+
+
+.styled-animated-input input[type="text"],
+.styled-animated-input input[type="number"],
+.styled-animated-input textarea,
+.styled-animated-input select {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  font-size: 1em;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.styled-animated-input input:focus,
+.styled-animated-input select:focus,
+.styled-animated-input textarea:focus {
+  border-color: #ff7e5f;
+  box-shadow: 0 0 5px rgba(255, 126, 95, 0.5);
+}
+
+/* Checkbox Styling */
+.styled-animated-checkbox {
+  margin-bottom: 30px;
+}
+
+.styled-checkbox-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #ff6a95, #ffcc70);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 3s infinite, fadeInLeft 0.8s ease;
+}
+
+.styled-checkbox-label input {
+  margin-right: 10px;
+}
+
+/* File Input Styling */
+.styled-file-input-container {
+  margin-bottom: 20px;
+}
+
+.styled-custom-file-button {
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  color: white;
+  padding: 15px 50px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  animation: fadeInUp 0.8s ease;
+}
+
+.styled-custom-file-button:hover {
+  background: linear-gradient(90deg, #feb47b, #ff7e5f);
+  transform: scale(1.05);
+}
+
+.styled-image-preview {
+  display: flex;
+  margin-top: 10px;
+  max-width: 150px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: zoomIn 0.5s ease;
+}
+
+/* Submit Button */
+.styled-submit-button {
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  color: white;
+  padding: 15px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  animation: fadeInUp 0.8s ease;
+}
+
+.styled-submit-button:hover {
+  background: linear-gradient(90deg, #feb47b, #ff7e5f);
+  transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  0% { opacity: 0; transform: translateX(-20px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoomIn {
+  0% { transform: scale(0.95); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+.bottomimages > * {
+  margin-right: 10px;
+}
+
+
+.bottomimages > *:last-child {
+  margin-right: 0;
+}
+
