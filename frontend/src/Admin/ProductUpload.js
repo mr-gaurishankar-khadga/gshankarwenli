@@ -72,6 +72,11 @@ const ProductUpload = () => {
     minitext5: '',
     minitext6: '',
 
+    brand_name:'',
+    hsn_code:'',
+    sku:'',
+    weight:'',
+
     title: '',
     price: '',
     sizes: [],
@@ -135,6 +140,13 @@ const ProductUpload = () => {
       formData.minitext5 &&
       formData.minitext6 &&
 
+      //new
+      formData.brand_name &&
+      formData.hsn_code &&
+      formData.sku &&
+      formData.weight &&
+      //end
+
       formData.price &&
       formData.categories &&
       formData.sizes.length > 0 &&
@@ -187,6 +199,11 @@ const ProductUpload = () => {
         colors: [],
         quantity: '',
         discount: '',
+
+        brand_name:'',
+        hsn_code:'',
+        sku:'',
+        weight:'',
       });
       setSelectedImages({
         front: null,
@@ -304,6 +321,69 @@ const ProductUpload = () => {
             required
           ></textarea>
         </div>
+
+
+
+          {/* from here new filed */}
+
+          <div className="styled-animated-input">
+            <label>SKU</label>
+            <textarea
+              name="sku"
+              value={formData.sku}
+              onChange={handleChange}
+              required
+            ></textarea>
+          </div>
+
+
+
+          
+          
+          <div className="styled-animated-input">
+            <label>WEIGHT</label>
+            <textarea
+              name="weight"
+              value={formData.weight}
+              onChange={handleChange}
+              required
+            ></textarea>
+          </div>
+
+
+
+
+          
+          <div className="styled-animated-input">
+            <label>HSN-CODE</label>
+            <textarea
+              name="hsn_code"
+              value={formData.hsn_code}
+              onChange={handleChange}
+              required
+            ></textarea>
+          </div>
+
+
+
+
+          
+          <div className="styled-animated-input">
+            <label>BrandName </label>
+            <textarea
+              name="brand_name"
+              value={formData.brand_name}
+              onChange={handleChange}
+              required
+            ></textarea>
+          </div>
+
+
+
+
+          
+          
+
 
 
         

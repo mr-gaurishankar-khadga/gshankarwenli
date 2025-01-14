@@ -1,4 +1,3 @@
-// routes/productRoutes.js
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
@@ -12,7 +11,27 @@ router.post('/', upload.fields([
   { name: 'f4', maxCount: 1 }
 ]), async (req, res) => {
   try {
-    const { title, categories, description, minitext1,minitext2,minitext3,minitext4,minitext5,minitext6,price, sizes, colors, quantity, discount } = req.body;
+    const { 
+      title, 
+      categories, 
+      description, 
+      minitext1, 
+      minitext2, 
+      minitext3, 
+      minitext4, 
+      minitext5, 
+      minitext6, 
+      price, 
+      sizes, 
+      colors, 
+      quantity, 
+      discount, 
+      brand_name, 
+      hsn_code, 
+      sku, 
+      weight,
+      dimensions 
+    } = req.body;
 
     const frontImage = req.files['front'] ? req.files['front'][0].path : null;
     const backImage = req.files['back'] ? req.files['back'][0].path : null;
@@ -37,7 +56,17 @@ router.post('/', upload.fields([
       frontImage,
       backImage,
       extraImage1,
-      extraImage2
+      extraImage2,
+      sku,
+      weight,
+      hsn_code,
+      brand_name,
+      dimensions: {
+        length: dimensions.length,
+        width: dimensions.width,
+        height: dimensions.height,
+        unit: dimensions.unit || 'cm'
+      }
     });
 
     await newProduct.save();
@@ -67,7 +96,27 @@ router.put('/:id', upload.fields([
 ]), async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, categories, description,minitext1,minitext2,minitext3,minitext4,minitext5,minitext6, price, sizes, colors, quantity, discount } = req.body;
+    const { 
+      title, 
+      categories, 
+      description, 
+      minitext1, 
+      minitext2, 
+      minitext3, 
+      minitext4, 
+      minitext5, 
+      minitext6, 
+      price, 
+      sizes, 
+      colors, 
+      quantity, 
+      discount, 
+      brand_name, 
+      hsn_code, 
+      sku, 
+      weight,
+      dimensions 
+    } = req.body;
 
     const frontImage = req.files && req.files['front'] ? req.files['front'][0].path : req.body.existingFrontImage;
     const backImage = req.files && req.files['back'] ? req.files['back'][0].path : req.body.existingBackImage;
@@ -94,7 +143,17 @@ router.put('/:id', upload.fields([
         frontImage,
         backImage,
         extraImage1,
-        extraImage2
+        extraImage2,
+        sku,
+        weight,
+        hsn_code,
+        brand_name,
+        dimensions: {
+          length: dimensions.length,
+          width: dimensions.width,
+          height: dimensions.height,
+          unit: dimensions.unit || 'cm'
+        }
       },
       { new: true }
     );
@@ -138,3 +197,5 @@ router.get('/search', async (req, res) => {
 });
 
 module.exports = router;
+
+//done
