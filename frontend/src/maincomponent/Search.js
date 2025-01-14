@@ -16,7 +16,7 @@ const SearchedProduct = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const baseURL = 'https://mrrapo.onrender.com'; 
+  const baseURL = 'https://gshankarwenli-1x.onrender.com'; 
 
   // Get the search query from the URL
   const query = new URLSearchParams(location.search).get('query') || '';

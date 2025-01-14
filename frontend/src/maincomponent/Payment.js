@@ -162,7 +162,7 @@ const Payment = () => {
 
     setIsLoading(true);
     try {
-      const response = await fetch('https://mrrapo.onrender.com/api/payments/send-payment-otp', {
+      const response = await fetch('https://gshankarwenli-1x.onrender.com/api/payments/send-payment-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -194,7 +194,7 @@ const Payment = () => {
 
     setIsLoading(true);
     try {
-      const response = await fetch('https://mrrapo.onrender.com/api/payments/verify-payment-otp', {
+      const response = await fetch('https://gshankarwenli-1x.onrender.com/api/payments/verify-payment-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -251,7 +251,7 @@ const Payment = () => {
     };
 
     try {
-      const response = await fetch('https://mrrapo.onrender.com/api/payments', {
+      const response = await fetch('https://gshankarwenli-1x.onrender.com/api/payments', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -293,7 +293,7 @@ const Payment = () => {
               <tr>
                 <td className="product-image-cell">
                   <img
-                    src={`https://mrrapo.onrender.com/${product.frontImage}`}
+                    src={`https://gshankarwenli-1x.onrender.com/${product.frontImage}`}
                     alt={product.title}
                     className="product-image-all"
                   />

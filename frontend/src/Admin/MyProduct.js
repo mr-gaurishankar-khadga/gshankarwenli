@@ -29,7 +29,7 @@ const MyProduct = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('https://mrrapo.onrender.com/api/products');
+        const response = await axios.get('https://gshankarwenli-1x.onrender.com/api/products');
         setProducts(response.data.products);
       } catch (err) {
         setError(err);
@@ -84,7 +84,7 @@ const MyProduct = () => {
         colors: formData.colors.split(',').map(color => color.trim()),
       };
       await axios.put(
-        `https://mrrapo.onrender.com/api/products/${editingProduct._id}`,
+        `https://gshankarwenli-1x.onrender.com/api/products/${editingProduct._id}`,
         updatedProduct
       );
       alert('Product updated successfully');
@@ -99,7 +99,7 @@ const MyProduct = () => {
 
   const handleDeleteClick = async (productId) => {
     try {
-      await axios.delete(`https://mrrapo.onrender.com/api/products/${productId}`);
+      await axios.delete(`https://gshankarwenli-1x.onrender.com/api/products/${productId}`);
       alert('Product deleted successfully');
       setProducts(products.filter(product => product._id !== productId));
     } catch (error) {
@@ -126,8 +126,8 @@ const MyProduct = () => {
                 <img
                   src={
                     hoveredIndex === index && product.backImage
-                      ? `https://mrrapo.onrender.com/${product.backImage}`
-                      : `https://mrrapo.onrender.com/${product.frontImage}`
+                      ? `https://gshankarwenli-1x.onrender.com/${product.backImage}`
+                      : `https://gshankarwenli-1x.onrender.com/${product.frontImage}`
                   }
                   alt={product.title}
                   className="product-showcase-image"

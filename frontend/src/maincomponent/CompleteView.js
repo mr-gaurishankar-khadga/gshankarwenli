@@ -127,7 +127,7 @@ const CompleteView = () => {
                   style={{ overflow: 'hidden', position: 'relative' }}
                 >
                   <img
-                    src={`https://mrrapo.onrender.com/${src}`}
+                    src={`https://gshankarwenli-1x.onrender.com/${src}`}
                     alt={product.title}
                     className={initialLoad ? 'initial-zoom' : ''}
                   />

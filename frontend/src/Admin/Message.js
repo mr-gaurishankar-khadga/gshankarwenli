@@ -12,7 +12,7 @@ function Message() {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await axios.get('https://mrrapo.onrender.com/api/messages');
+        const response = await axios.get('https://gshankarwenli-1x.onrender.com/api/messages');
         setMessages(response.data);
       } catch (error) {
         setError('Failed to fetch messages.');
@@ -30,7 +30,7 @@ function Message() {
     const email = messages[currentMessageId].email;
 
     try {
-      await axios.post('https://mrrapo.onrender.com/api/reply', {
+      await axios.post('https://gshankarwenli-1x.onrender.com/api/reply', {
         email: email,
         message: replyMessage,
       });
