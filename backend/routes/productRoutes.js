@@ -2,7 +2,12 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const Product = require('../models/productModel');
+
+
+
 const upload = multer({ dest: 'uploads/' });
+
+
 
 router.post('/', upload.fields([
   { name: 'front', maxCount: 1 },
