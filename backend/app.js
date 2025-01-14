@@ -23,7 +23,7 @@ const reviewRoutes = require('./routes/reviewRoutes');
 const app = express();
 
 app.use(cors({
-  origin: 'http://www.wenli.in',
+  origin: 'https://www.wenli.in',
 
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
