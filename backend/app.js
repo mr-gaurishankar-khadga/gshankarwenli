@@ -23,7 +23,7 @@ const reviewRoutes = require('./routes/reviewRoutes');
 const app = express();
 
 app.use(cors({
-  origin: 'https://www.wenli.in',
+  origin: 'https://gshankarwenli.vercel.app',
 
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
