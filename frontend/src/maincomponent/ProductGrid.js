@@ -44,7 +44,7 @@ const ProductGrid = ({ searchQuery = '', user }) => {
     setLoading(true);
 
     try {
-      const response = await axios.get(`https://gshankarwenli-1x.onrender.com/api/products?page=${page}&search=${searchQuery}`);
+      const response = await axios.get(`https://gshankarwenli.onrender.com/api/products?page=${page}&search=${searchQuery}`);
       const newProducts = response.data.products;
 
       if (newProducts.length === 0) {
@@ -155,8 +155,8 @@ const ProductCard = React.memo(({ product, index, hoveredIndex, setHoveredIndex,
           <img
             src={
               hoveredIndex === index && product.backImage
-                ? `https://gshankarwenli-1x.onrender.com/${product.backImage}`
-                : `https://gshankarwenli-1x.onrender.com/${product.frontImage}`
+                ? `https://gshankarwenli.onrender.com/${product.backImage}`
+                : `https://gshankarwenli.onrender.com/${product.frontImage}`
             }
             alt={product.title}
             style={imageStyle}

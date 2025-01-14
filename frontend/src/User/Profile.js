@@ -23,7 +23,7 @@ const Profile = () => {
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch('https://gshankarwenli-1x.onrender.com/profile', {
+      const response = await fetch('https://gshankarwenli.onrender.com/profile', {
         method: 'GET',
         credentials: 'include',
       });

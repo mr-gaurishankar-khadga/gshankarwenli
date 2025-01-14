@@ -24,7 +24,7 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('https://gshankarwenli-1x.onrender.com/api/signup', {
+      const response = await axios.post('https://gshankarwenli.onrender.com/api/signup', {
         email,
         firstName,
         lastName,
@@ -48,7 +48,7 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('https://gshankarwenli-1x.onrender.com/api/verify-otp', { email, otp });
+      const response = await axios.post('https://gshankarwenli.onrender.com/api/verify-otp', { email, otp });
       alert(response.data.message);
 
       // Store token if your backend sends one after OTP verification

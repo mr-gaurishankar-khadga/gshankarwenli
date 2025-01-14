@@ -11,7 +11,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
 
     const handleSubmit = async () => {
         try {
-            const response = await fetch('https://gshankarwenli-1x.onrender.com/api/send-otp', { 
+            const response = await fetch('https://gshankarwenli.onrender.com/api/send-otp', { 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
 
     const handleVerifyOtp = async () => {
         try {
-            const response = await fetch('https://gshankarwenli-1x.onrender.com/api/verify-otp1', {
+            const response = await fetch('https://gshankarwenli.onrender.com/api/verify-otp1', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

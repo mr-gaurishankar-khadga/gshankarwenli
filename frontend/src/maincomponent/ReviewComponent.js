@@ -36,7 +36,7 @@ const ReviewComponent = () => {
     }
 
     try {
-      await axios.post('https://gshankarwenli-1x.onrender.com/api/reviews', formData);
+      await axios.post('https://gshankarwenli.onrender.com/api/reviews', formData);
       
       toast.success('Review submitted successfully!', {
         position: "top-right",
