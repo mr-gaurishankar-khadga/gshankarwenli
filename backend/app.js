@@ -23,7 +23,7 @@ const reviewRoutes = require('./routes/reviewRoutes');
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:3000', 
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -34,7 +34,6 @@ app.use(express.json());
 const generateRandomSecretKey = () => {
   return crypto.randomBytes(32).toString('hex');
 };
-
 
 app.use(session({
   secret: process.env.SESSION_SECRET || generateRandomSecretKey(),
