@@ -20,7 +20,7 @@ const MensWearPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/products');
+        const response = await axios.get('https://mrrapo.onrender.com/api/products');
         const boysProducts = response.data.products.filter(
           (product) => product.categories.toLowerCase() === 'boys'
         );
@@ -87,8 +87,8 @@ const MensWearPage = () => {
                 <img
                   src={
                     hoveredIndex === index && product.backImage
-                      ? `http://localhost:8000/${product.backImage}`
-                      : `http://localhost:8000/${product.frontImage}`
+                      ? `https://mrrapo.onrender.com/${product.backImage}`
+                      : `https://mrrapo.onrender.com/${product.frontImage}`
                   }
                   alt={product.title}
                   className={`product-image ${loadedImages.has(index) ? 'fade-in' : 'hidden'}`} 

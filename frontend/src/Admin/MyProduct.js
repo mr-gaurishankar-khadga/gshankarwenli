@@ -29,7 +29,7 @@ const MyProduct = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/products');
+        const response = await axios.get('https://mrrapo.onrender.com/api/products');
         setProducts(response.data.products);
       } catch (err) {
         setError(err);
@@ -84,7 +84,7 @@ const MyProduct = () => {
         colors: formData.colors.split(',').map(color => color.trim()),
       };
       await axios.put(
-        `http://localhost:8000/api/products/${editingProduct._id}`,
+        `https://mrrapo.onrender.com/api/products/${editingProduct._id}`,
         updatedProduct
       );
       alert('Product updated successfully');
@@ -99,7 +99,7 @@ const MyProduct = () => {
 
   const handleDeleteClick = async (productId) => {
     try {
-      await axios.delete(`http://localhost:8000/api/products/${productId}`);
+      await axios.delete(`https://mrrapo.onrender.com/api/products/${productId}`);
       alert('Product deleted successfully');
       setProducts(products.filter(product => product._id !== productId));
     } catch (error) {
@@ -126,8 +126,8 @@ const MyProduct = () => {
                 <img
                   src={
                     hoveredIndex === index && product.backImage
-                      ? `http://localhost:8000/${product.backImage}`
-                      : `http://localhost:8000/${product.frontImage}`
+                      ? `https://mrrapo.onrender.com/${product.backImage}`
+                      : `https://mrrapo.onrender.com/${product.frontImage}`
                   }
                   alt={product.title}
                   className="product-showcase-image"

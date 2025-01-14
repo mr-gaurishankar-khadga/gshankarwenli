@@ -36,7 +36,7 @@ const ReviewComponent = () => {
     }
 
     try {
-      await axios.post('http://localhost:8000/api/reviews', formData);
+      await axios.post('https://mrrapo.onrender.com/api/reviews', formData);
       
       toast.success('Review submitted successfully!', {
         position: "top-right",

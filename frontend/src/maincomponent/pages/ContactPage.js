@@ -22,7 +22,7 @@ const ContactPage = () => {
     setSuccess(null);
     
     try {
-      const response = await axios.post('http://localhost:8000/api/messages', { 
+      const response = await axios.post('https://mrrapo.onrender.com/api/messages', { 
         name, 
         email, 
         message 

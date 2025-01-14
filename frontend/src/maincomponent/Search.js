@@ -16,7 +16,7 @@ const SearchedProduct = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const baseURL = 'http://localhost:8000'; 
+  const baseURL = 'https://mrrapo.onrender.com'; 
 
   // Get the search query from the URL
   const query = new URLSearchParams(location.search).get('query') || '';

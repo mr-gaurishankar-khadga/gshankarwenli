@@ -11,7 +11,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
 
     const handleSubmit = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/send-otp', { 
+            const response = await fetch('https://mrrapo.onrender.com/api/send-otp', { 
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ const ForgotPasswordModal = ({ isOpen, onClose }) => {
 
     const handleVerifyOtp = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/verify-otp1', {
+            const response = await fetch('https://mrrapo.onrender.com/api/verify-otp1', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

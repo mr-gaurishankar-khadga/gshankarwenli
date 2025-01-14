@@ -28,7 +28,7 @@ const Orders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/payments');
+        const response = await axios.get('https://mrrapo.onrender.com/api/payments');
         const transformedOrders = response.data.map(order => ({
           _id: order._id.$oid || order._id,
           createdAt: order.timestamp?.$date ? new Date(parseInt(order.timestamp.$date.$numberLong)) : new Date(order.timestamp),
@@ -67,7 +67,7 @@ const Orders = () => {
 
   const handlePaymentConfirmation = async (orderId) => {
     try {
-      await axios.post(`http://localhost:8000/api/payments/${orderId}/confirm`);
+      await axios.post(`https://mrrapo.onrender.com/api/payments/${orderId}/confirm`);
       
       // Update local state
       const updatedOrders = orders.map(order => {

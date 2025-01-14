@@ -35,7 +35,7 @@ const ShoppingCartView = () => {
           {cartItems.map((item) => (
             <div className="cart-card" key={item.id}>
               <div className="cart-card-image-wrapper">
-                <img src={`http://localhost:8000/${item.image}`} alt={item.name} className="cart-card-image" />
+                <img src={`https://mrrapo.onrender.com/${item.image}`} alt={item.name} className="cart-card-image" />
               </div>
               <div className="cart-card-details">
                 <h4 className="cart-card-name">{item.name}</h4>
