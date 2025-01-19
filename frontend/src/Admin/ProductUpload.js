@@ -178,7 +178,8 @@ const ProductUpload = () => {
     });
 
     try {
-      const response = await axios.post('https://gshankarwenli.onrender.com/api/products', data);
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/products`, data);
+
       alert('Product uploaded successfully:', response.data);
       setFormData({
         front: null,

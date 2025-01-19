@@ -20,7 +20,8 @@ const WomensWearPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('https://gshankarwenli.onrender.com/api/products');
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products`);
+
         // Filter products based on category "Boys"
         const boysProducts = response.data.products.filter(
           (product) => product.categories.toLowerCase() === 'girls'
@@ -89,16 +90,17 @@ const WomensWearPage = () => {
           >
             <div className="image-container">
               <LazyLoad height={250} offset={100}>
-                <img
-                  src={
-                    hoveredIndex === index && product.backImage
-                      ? `https://gshankarwenli.onrender.com/${product.backImage}`
-                      : `https://gshankarwenli.onrender.com/${product.frontImage}`
-                  }
-                  alt={product.title}
-                  className={`product-image ${loadedImages.has(index) ? 'fade-in' : 'hidden'}`} 
-                  onLoad={() => handleImageLoad(index)}
-                />
+              <img
+                src={
+                  hoveredIndex === index && product.backImage
+                    ? `${process.env.REACT_APP_BACKEND_URL}/${product.backImage}`
+                    : `${process.env.REACT_APP_BACKEND_URL}/${product.frontImage}`
+                }
+                alt={product.title}
+                className={`product-image ${loadedImages.has(index) ? 'fade-in' : 'hidden'}`}
+                onLoad={() => handleImageLoad(index)}
+              />
+
               </LazyLoad>
 
               <div className="likeiconbtn">

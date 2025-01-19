@@ -29,7 +29,7 @@ const MyProduct = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('https://gshankarwenli.onrender.com/api/products');
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products`);
         setProducts(response.data.products);
       } catch (err) {
         setError(err);
@@ -84,7 +84,7 @@ const MyProduct = () => {
         colors: formData.colors.split(',').map(color => color.trim()),
       };
       await axios.put(
-        `https://gshankarwenli.onrender.com/api/products/${editingProduct._id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/products/${editingProduct._id}`,
         updatedProduct
       );
       alert('Product updated successfully');
@@ -99,7 +99,7 @@ const MyProduct = () => {
 
   const handleDeleteClick = async (productId) => {
     try {
-      await axios.delete(`https://gshankarwenli.onrender.com/api/products/${productId}`);
+      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/products/${productId}`);
       alert('Product deleted successfully');
       setProducts(products.filter(product => product._id !== productId));
     } catch (error) {
@@ -123,15 +123,16 @@ const MyProduct = () => {
           >
             <div className="product-showcase-image-container">
               <LazyLoad height={250} offset={100}>
-                <img
-                  src={
-                    hoveredIndex === index && product.backImage
-                      ? `https://gshankarwenli.onrender.com/${product.backImage}`
-                      : `https://gshankarwenli.onrender.com/${product.frontImage}`
-                  }
-                  alt={product.title}
-                  className="product-showcase-image"
-                />
+              <img
+                src={
+                  hoveredIndex === index && product.backImage
+                    ? `${process.env.REACT_APP_BACKEND_URL}/${product.backImage}`
+                    : `${process.env.REACT_APP_BACKEND_URL}/${product.frontImage}`
+                }
+                alt={product.title}
+                className="product-showcase-image"
+              />
+
               </LazyLoad>
               <div className="product-showcase-categories">
                 <span className="product-showcase-category">

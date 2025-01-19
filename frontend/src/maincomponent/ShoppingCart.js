@@ -26,7 +26,8 @@ const ShoppingCart = () => {
       {cartItems.length > 0 ? (
         cartItems.map((item) => (
           <div className="cart-item" key={item.id}>
-            <img src={`https://gshankarwenli.onrender.com/${item.image}`} alt={item.name} />
+            <img src={`${process.env.REACT_APP_BACKEND_URL}/${item.image}`} alt={item.name} />
+
             <div className="item-details">
               <h4>{item.name}</h4>
               <p>{item.color} | {item.size}</p>

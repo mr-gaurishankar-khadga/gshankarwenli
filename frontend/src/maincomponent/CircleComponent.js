@@ -122,14 +122,12 @@ const CircleComponent = () => {
   }, []);
 
   const handleCategoryClick = (category) => {
-    // First handle the touch/active state
     if (isMobile) {
       setActiveCategory(prev => prev === category.id ? null : category.id);
     }
     
-    // Add a small delay for the animation to complete
+
     setTimeout(() => {
-      // Navigate to the category route
       navigate(category.route);
     }, 200);
   };

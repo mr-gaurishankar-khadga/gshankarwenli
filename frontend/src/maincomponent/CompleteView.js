@@ -13,6 +13,8 @@ import CustomerReviews from './CustomerReviews';
 
 
 
+
+
 const CompleteView = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -117,6 +119,7 @@ const CompleteView = () => {
     <>
       <div className="complete-view">
         <div className="leftsideview"></div>
+
         {product ? (
           <>
             <div className="frames">
@@ -127,7 +130,8 @@ const CompleteView = () => {
                   style={{ overflow: 'hidden', position: 'relative' }}
                 >
                   <img
-                    src={`https://gshankarwenli.onrender.com/${src}`}
+                    src={`${process.env.REACT_APP_BACKEND_URL}/${src}`}
+
                     alt={product.title}
                     className={initialLoad ? 'initial-zoom' : ''}
                   />
@@ -137,7 +141,7 @@ const CompleteView = () => {
 
 
 
-            <div className="product-info" style={{ marginTop: '10px', fontFamily:'ITC Benguiat' }}>
+            <div className="product-info" style={{ marginTop: '10px', fontFamily:'ITC Benguiat'}}>
             <h1 style={{ fontFamily: 'ITC Benguiat', color:'#121212' }}> {product.title} </h1>
 
 
@@ -196,23 +200,17 @@ const CompleteView = () => {
 
 
                 {/* <h4>Size <span style={{ textDecoration: 'underline',cursor:'pointer' }}> Chart </span></h4> */}
-              <div className="Size-optionx" style={{marginLeft:'5px'}}>
-                <div className="Size-optionsx">
+              <div className="Size-optionx" style={{marginLeft:'5px',backgroundColor:''}}>
+                <div className="Size-optionsx" style={{width:'',backgroundColor:'',maxWidth:''}}>
                   {product.sizes.map((size, index) => (
-                    <button key={index} className={`sizex ${size}`}>{size}</button>
+                    <button key={index} className={`sizex ${size}`} style={{padding:'10px 25px',justifyContent:'space-around',marginLeft:'5px'}}>{size}</button>
                   ))}
                 </div>
 
 
 
-
-
-
-
-
-
-                <div className="selectitem">
-                  <select name="quantity" id="quantity" onChange={handleQuantityChange} value={quantity}>
+                <div className="selectitem" style={{backgroundColor:'',width:'95%'}}>
+                  <select name="quantity" id="quantity" onChange={handleQuantityChange} value={quantity} style={{backgroundColor:''}}>
                     {[1, 2, 3, 4, 5].map((q) => (
                       <option key={q} value={q}>  {q}  </option>
                     ))}
@@ -224,7 +222,7 @@ const CompleteView = () => {
 
 
 
-              <div className="action-buttons" style={{width:'400px',display:'block',margin:'',height:''}}>
+              <div className="action-buttons" style={{maxWidth:'400px',display:'block',margin:'',height:''}}>
                 <Button 
                   onClick={handleAddToCart} 
                   style={{
@@ -237,7 +235,8 @@ const CompleteView = () => {
                     borderRadius: '5px',
                     transition: 'transform 0.3s ease-in-out',
                     marginRight: '10px',
-                    width:'350px',
+                    width:'315px',
+                    maxWidth:'350px',
                     background:'rgb(18,18,18)',
                   }}
                   onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
@@ -289,6 +288,7 @@ const CompleteView = () => {
                       transition: 'transform 1m ease-in-out',
                       marginLeft:'640px',
                       marginTop:'200px',
+                      marginBottom:'10px'
                     },
                   }}
                 >
@@ -311,8 +311,9 @@ const CompleteView = () => {
                     textTransform: 'none',
                     borderRadius: '5px',
                     transition: 'transform 0.3s ease-in-out',
-                    width:'350px',
-                    marginTop:'10px'
+                    width:'315px',
+                    maxWidth:'350px',
+                    marginTop:'10px',
                   }}
                   onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                   onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
@@ -390,13 +391,13 @@ const CompleteView = () => {
 
 
       
-      <CustomerReviews/>
+      {/* <CustomerReviews/> */}
       <br />
       <br />
       <br />
 
 
-      <ProductGrid/>
+      {/* <ProductGrid/> */}
     </>
   );
 };

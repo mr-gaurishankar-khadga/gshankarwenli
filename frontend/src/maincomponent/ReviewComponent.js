@@ -36,7 +36,8 @@ const ReviewComponent = () => {
     }
 
     try {
-      await axios.post('https://gshankarwenli.onrender.com/api/reviews', formData);
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/reviews`, formData);
+
       
       toast.success('Review submitted successfully!', {
         position: "top-right",

@@ -44,7 +44,8 @@ const ProductGrid = ({ searchQuery = '', user }) => {
     setLoading(true);
 
     try {
-      const response = await axios.get(`https://gshankarwenli.onrender.com/api/products?page=${page}&search=${searchQuery}`);
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products?page=${page}&search=${searchQuery}`);
+
       const newProducts = response.data.products;
 
       if (newProducts.length === 0) {
@@ -107,9 +108,9 @@ const ProductGrid = ({ searchQuery = '', user }) => {
 
 
   return (
-    <div className="product-grid">
+    <div className="product-grid" >
       <h2>New Arrivals</h2>
-      <div className="products">
+      <div className="products" >
         <Suspense fallback={<p>Loading products...</p>}>
           {products.map((product, index) => (
             <ProductCard 
@@ -123,10 +124,10 @@ const ProductGrid = ({ searchQuery = '', user }) => {
               likedProducts={likedProducts}
               setLikedProducts={setLikedProducts}
               handleClick={handleClick}
-            />
-          ))}
+              />
+            ))}
         </Suspense>
-        {/* {loading && <p>Loading more products...</p>} */}
+        {loading && <p>Loading more products...</p>}
       </div>
     </div>
   );
@@ -137,58 +138,66 @@ const ProductGrid = ({ searchQuery = '', user }) => {
 
 
 const ProductCard = React.memo(({ product, index, hoveredIndex, setHoveredIndex, loadedImages, setLoadedImages, likedProducts, setLikedProducts, handleClick }) => {
-  const imageStyle = { height: '100%', width: '100%', display: 'block', transition: 'transform 0.5s ease, transform-origin 5s ease', transformOrigin: 'center', animation: loadedImages.has(index) ? 'zoomIn 1.0s ease-out forwards' : 'none',
-};
+  const imageStyle = { 
+    maxHeight: '100%',
+    height: window.innerWidth < 768 ? '260px' : '470px',
+    width: '100%', 
+    display: 'block', 
+    transition: 'transform 0.5s ease, transform-origin 5s ease, filter 0.5s ease, opacity 0.5s ease', 
+    transformOrigin: 'center',
+    filter: loadedImages.has(index) ? 'blur(0)' : 'blur(4px)',
+    opacity: loadedImages.has(index) ? '1' : '0',
+    animation: loadedImages.has(index) ? 'zoomIn 1.0s ease-out forwards' : 'none',
+  };
+
 
 
 
 
   return (
-    <div
-      className="product-card"
-      onMouseEnter={() => setHoveredIndex(index)}
-      onMouseLeave={() => setHoveredIndex(null)}
-      onClick={() => handleClick(product)}
-    >
-      <div className="image-container">
+    <div className="product-card" style={{}} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)} onClick={() => handleClick(product)} >
+      <div className="image-container" style={{borderRadius:''}}>
         <LazyLoad height={250} offset={100}>
-          <img
-            src={
-              hoveredIndex === index && product.backImage
-                ? `https://gshankarwenli.onrender.com/${product.backImage}`
-                : `https://gshankarwenli.onrender.com/${product.frontImage}`
-            }
-            alt={product.title}
-            style={imageStyle}
-            onLoad={() => setLoadedImages((prev) => new Set(prev).add(index))}
-          />
+        <img
+          src={
+            hoveredIndex === index && product.backImage
+              ? `${process.env.REACT_APP_BACKEND_URL}/${product.backImage}`
+              : `${process.env.REACT_APP_BACKEND_URL}/${product.frontImage}`
+          }
+          alt={product.title}
+          style={imageStyle}
+          onLoad={() => setLoadedImages((prev) => new Set(prev).add(index))}
+        />
         </LazyLoad>
 
         <div className="likeiconbtn" onClick={(e) => { e.stopPropagation();}}>
           <FavoriteIcon className={`like-icon ${likedProducts.has(product._id) ? 'liked' : ''}`} />
         </div>
 
-        <div className="categories">
-          <span className="category">{product.categories}</span>
-        </div>
+        {/* <div className="categories"> */}
+          {/* <span className="category">{product.categories}</span> */}
+          {/* <span className="category" style={{fontSize:'6px'}}>New Arrival</span> */}
+        {/* </div> */}
       </div>
 
+
+
+
       <div className="product-details">
-        <h3 style={{ fontFamily: 'Twentieth Century' }}>{product.title}</h3>
+        <h3 style={{fontSize:'10px',borderBottom:'2px solid skyblue',width:'7%',}}>Wenli</h3>
+        <h3 style={{ fontFamily: 'Twentieth Century',fontSize:'16px' }}>{product.title}</h3>
         <div className="price">
-          <span className="current-price" style={{ fontFamily: 'Twentieth Century sans-serif' }}>
+          <span className="current-price" style={{ fontFamily: 'Twentieth Century sans-serif',fontSize:'13px' }}>
             Rs. {product.price}
           </span>
         </div>
 
 
-
-        <div className="rating">
+        <div className="rating" style={{marginLeft:''}}>
           {[...Array(5)].map((_, i) => (
             <span key={i}><GradeIcon className="ratingicon" /></span>
           ))}
         </div>
-
 
 
         <div className="Size-options" style={{display:'none'}}>
@@ -196,9 +205,7 @@ const ProductCard = React.memo(({ product, index, hoveredIndex, setHoveredIndex,
           <button className="size">M</button>
           <button className="size">L</button>
           <button className="size">XL</button>
-
           <ShoppingCartIcon className="cart-icon" style={{ display: window.innerWidth >= 768 ? 'block' : 'none' }} />
-
         </div>
 
       </div>

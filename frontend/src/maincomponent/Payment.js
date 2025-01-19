@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import QRCode from 'qrcode.react';
+import {MapPin, SendHorizontal} from 'lucide-react'
 import './Payment.css';
+import './PaymentSelector.css';
+
+import { ToastContainer, toast } from 'react-toastify';
 
 const Payment = () => {
   const location = useLocation();
@@ -23,6 +27,11 @@ const Payment = () => {
   const [otpSent, setOtpSent] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+
+
+  
 
   // Card formatting handlers
   const handlePaymentMethodChange = (event) => {
@@ -162,7 +171,8 @@ const Payment = () => {
 
     setIsLoading(true);
     try {
-      const response = await fetch('https://gshankarwenli.onrender.com/api/payments/send-payment-otp', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/payments/send-payment-otp`, {
+
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -186,6 +196,10 @@ const Payment = () => {
     }
   };
 
+
+
+
+
   const handleVerifyOtp = async () => {
     if (!otp) {
       alert('Please enter OTP');
@@ -194,7 +208,8 @@ const Payment = () => {
 
     setIsLoading(true);
     try {
-      const response = await fetch('https://gshankarwenli.onrender.com/api/payments/verify-payment-otp', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/payments/verify-payment-otp`, {
+
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -220,6 +235,42 @@ const Payment = () => {
 
   // Payment submission handler
   const handlePaymentSubmission = async () => {
+
+    if (isLoading) return;
+
+    try {
+      setIsLoading(true);
+      // Show success toast
+      toast.success('Order Confirmed!', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      
+    } catch (error) {
+      // Show error toast
+      toast.error('Payment failed. Please try again.', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+
+
+
+
     if (!address || !email || !name || !phone) {
       alert('Please fill in all required fields.');
       return;
@@ -251,7 +302,8 @@ const Payment = () => {
     };
 
     try {
-      const response = await fetch('https://gshankarwenli.onrender.com/api/payments', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/payments`, {
+
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -271,6 +323,77 @@ const Payment = () => {
     }
   };
 
+
+
+
+
+  //paymment method from here ok
+  const [isOpen, setIsOpen] = useState(false);
+    const [selectedMethod, setSelectedMethod] = useState('visa');
+    const paymentMethods = [
+    {
+      id: 'cod',
+      name: 'COD',
+      logo: (
+        <svg viewBox="0 0 24 24" width="25" height="25">
+          <path fill="#00a86b" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.31-8.86c-1.77-.45-2.34-.94-2.34-1.67 0-.84.79-1.43 2.1-1.43 1.38 0 1.9.66 1.94 1.64h1.71c-.05-1.34-.87-2.57-2.49-2.97V5H10.9v1.69c-1.51.32-2.72 1.3-2.72 2.81 0 1.79 1.49 2.69 3.66 3.21 1.95.46 2.34 1.15 2.34 1.87 0 .53-.39 1.39-2.1 1.39-1.6 0-2.23-.72-2.32-1.64H8.04c.1 1.7 1.36 2.66 2.86 2.97V19h2.34v-1.67c1.52-.29 2.72-1.16 2.73-2.77-.01-2.2-1.9-2.96-3.66-3.42z"/>
+        </svg>
+      )
+    },
+    // {
+    //   id: 'visa',
+    //   name: 'VISA',
+    //   logo: (
+    //     <svg viewBox="0 0 1000 324" width="40" height="25">
+    //       <path fill="#1434CB" d="M651.19,0.39h-99.54c-18.56,0-32.45,5.13-40.65,23.89L408.4,321.05h99.54c0,0,11.95-31.45,14.64-38.34c8,0,79.14,0.11,89.33,0.11c2.07,8.89,8.48,38.23,8.48,38.23h87.97L651.19,0.39z M541.79,214.33c5.77-14.76,27.77-71.68,27.77-71.68c-0.41,0.67,5.72-14.83,9.23-24.44l4.7,21.93c0,0,13.31,61.17,16.12,74.19H541.79z"/>
+    //       <path fill="#1434CB" d="M895.22,0.39h-76.42c-17.43,0-27.33,9.48-34.09,20.13L656.64,321.05h99.54l18.12-49.86h111.04l10.46,49.86h87.97L895.22,0.39z M798.04,204.76c7.16-18.27,34.56-88.19,34.56-88.19c-0.48,0.79,7.12-18.31,11.48-30.25l5.85,27.22c0,0,16.55,75.77,20.04,91.22H798.04z"/>
+    //       <path fill="#1434CB" d="M285.2,0.39L190.06,219.52l-10.15-50.87c-17.72-57.04-72.98-118.72-134.87-149.6l87.03,301.61l102.93-0.41L377.23,0.39H285.2z"/>
+    //       <path fill="#F7B600" d="M131.52,0.39H0.46l-0.84,4.93c101.56,24.55,168.86,83.93,196.67,155.33L168.27,23.71C163.1,4.33,148.56,0.81,131.52,0.39z"/>
+    //     </svg>
+    //   )
+    // },
+    {
+      id: 'phonepe',
+      name: 'PhonePe',
+      logo: (
+        <svg viewBox="0 0 24 24" width="25" height="25">
+          <path fill="#5F259F" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z"/>
+          <path fill="#5F259F" d="M8.5 7v10l8.5-5z"/>
+        </svg>
+      )
+    },
+    {
+      id: 'googlepay',
+      name: 'GooglePay',
+      logo: (
+        <svg viewBox="0 0 24 24" width="25" height="25">
+          <path fill="#4285F4" d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12c6.627 0 12-5.373 12-12S18.627 0 12 0zm.14 19.018c-3.868 0-7-3.14-7-7.018c0-3.878 3.132-7.018 7-7.018c1.89 0 3.47.697 4.682 1.829l-1.974 1.978v-.004c-.735-.702-1.667-1.062-2.708-1.062c-2.31 0-4.187 1.956-4.187 4.273c0 2.315 1.877 4.277 4.187 4.277c2.096 0 3.522-1.202 3.816-2.852H12.14v-2.737h6.585c.088.47.135.96.135 1.474c0 4.01-2.677 6.86-6.72 6.86z"/>
+        </svg>
+      )
+    },
+    {
+      id: 'paytm',
+      name: 'Paytm',
+      logo: (
+        <svg viewBox="0 0 24 24" width="25" height="25">
+          <path fill="#00BAF2" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm1.5 16.5h-3v-9h3v9zm4.5-6h-3v6h3v-6z"/>
+        </svg>
+      )
+    }
+  ];
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const selectMethod = (methodId) => {
+    setSelectedMethod(methodId);
+    setIsOpen(false);
+  };
+
+
+
+
   if (!product) {
     return <p className="no-product">No product selected.</p>;
   }
@@ -279,36 +402,85 @@ const Payment = () => {
     <div className="mainpaymentcontainer" style={{display:'flex',justifyContent:'center'}}>
       <div className="payment-container">
         <div className="payment-view">
-          <table className="payment-table">
-            <thead>
-              <tr>
-                <th>Image</th>
-                <th>Title</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="product-image-cell">
-                  <img
-                    src={`https://gshankarwenli.onrender.com/${product.frontImage}`}
-                    alt={product.title}
-                    className="product-image-all"
-                  />
-                </td>
-                <td>{product.title}</td>
-                <td>Rs.{product.price}</td>
-                <td>{quantity}</td>
-                <td>Rs.{product.price * quantity}</td>
-              </tr>
-            </tbody>
-          </table>
+          
+          
+          
+          
+          {/* Component JSX */}
+          <div className="checkout-content-container">
+            <div className="promotional-discount-banner">
+              <span className="promotional-discount-message">
+                5% off on All order above Rs.800
+              </span>
+            </div>
 
-          <h3 className="payment-method-title">Select Payment Method</h3>
-          <div className="payment-methods">
-            <div className={`payment-option ${paymentMethod === 'COD' ? 'selected' : ''}`}>
+            <header className="checkout-page-header">
+              <div className="navigation-section-container">
+                <button className="navigation-back-button">
+                  <span> ← </span>
+                </button>
+                <div className="company-logo-text">WENLI</div>
+              </div>
+              
+              <div 
+                className="order-total-summary-section"
+                onClick={() => setIsExpanded(!isExpanded)}
+              >
+                <div className="order-total-content-wrapper">
+                  <span className="order-total-label-text">Order total</span>
+                  <span className="order-total-amount-text">₹{product.price * quantity}</span>
+                </div>
+                <span className={`expandable-toggle-icon ${isExpanded ? 'expandable-toggle-icon-rotated' : ''}`}>
+                  ▼
+                </span>
+              </div>
+            </header>
+
+            {isExpanded && (
+              <div className="expanded-details-container">
+                <div className="product-items-list-section">
+                  <div className="product-item-card-container">
+                    <div className="product-image-wrapper-container">
+                      <img 
+                        src={`${process.env.REACT_APP_BACKEND_URL}/${product.frontImage}`}
+
+                        alt={product.title} 
+                        className="product-image-element"
+                      />
+                    </div>
+                    <div className="product-information-container">
+                      <h3 className="product-title-heading">{product.title}</h3>
+                      <p className="product-variant-description">{product.size}</p>
+                    </div>
+                    <div className="product-price-amount">₹{product.price}</div>
+                  </div>
+                </div>
+
+                <div className="order-summary-breakdown-section">
+                  <div className="order-summary-row-container">
+                    <span>Subtotal</span>
+                    <span className="order-amount-text">₹{product.price * quantity}</span>
+                  </div>
+                  
+                  <div className="order-summary-row-container">
+                    <span>Shipping</span>
+                    <span className="shipping-calculation-status">Calculated at next step</span>
+                  </div>
+                  <div className="order-summary-row-container order-summary-row-total">
+                    <span>Total</span>
+                    <span className="order-amount-text">₹{product.price * quantity}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+
+
+
+
+
+            {/* <div className={`payment-option ${paymentMethod === 'COD' ? 'selected' : ''}`} style={{border:'1px solid rgb(0,168,107)'}}>
               <input
                 type="radio"
                 id="cod"
@@ -316,8 +488,12 @@ const Payment = () => {
                 value="COD"
                 onChange={handlePaymentMethodChange}
               />
-              <label htmlFor="cod" style={{fontSize:'15px'}}>COD</label>
-            </div>
+              <label htmlFor="cod" style={{fontSize:'15px',}}>COD</label>
+            </div> */}
+          
+
+          {/* <h3 className="payment-method-title" style={{fontSize:'',color:'rgb(0,168,107)'}}>Select Payment Method</h3>
+          <div className="payment-methods">
             <div className={`payment-option ${paymentMethod === 'Card Payment' ? 'selected' : ''}`}>
               <input
                 type="radio"
@@ -327,16 +503,6 @@ const Payment = () => {
                 onChange={handlePaymentMethodChange}
               />
               <label htmlFor="card" style={{fontSize:'15px'}}>Card</label>
-            </div>
-            <div className={`payment-option ${paymentMethod === 'UPI Payment' ? 'selected' : ''}`}>
-              <input
-                type="radio"
-                id="upi"
-                name="payment-method"
-                value="UPI Payment"
-                onChange={handlePaymentMethodChange}
-              />
-              <label htmlFor="upi" style={{fontSize:'15px'}}>UPI</label>
             </div>
           </div>
 
@@ -374,98 +540,184 @@ const Payment = () => {
                 />
               </div>
             </div>
-          )}
+          )} */}
 
-          {paymentMethod === 'UPI Payment' && (
-            <div className="upi-details">
-              <h3 className="upi-details-title">Scan the QR Code</h3>
-              <QRCode value="upi://pay?pa=your-vpa@upi&pn=Your Name&am=10.00&cu=INR" style={{margin:'20px'}}/>
-            </div>
-          )}
 
-          <div className="name-container">
-            <label>Name: </label><br />
+
+
+
+
+
+
+
+
+
+    <div className="payment-selector">
+      <h3 className="payment-method-title" style={{color:'rgb(0,168,107)'}}>Select Payment Method</h3>
+      
+      {/* Desktop View */}
+      <div className="desktop-view">
+        {paymentMethods.map((method) => (
+          <button
+            key={method.id}
+            className={`payment-option ${selectedMethod === method.id ? 'selected' : ''}`}
+            onClick={() => selectMethod(method.id)}
+            style={{border: '1px solid rgb(0,168,107)'}}
+          >
+            <div className="payment-logo">{method.logo}</div>
+            <span className="payment-name">{method.name}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Mobile View */}
+      <div className="mobile-view">
+        <button className="dropdown-toggle" onClick={toggleDropdown} style={{border: '1px solid rgb(0,168,107)'}}>
+          {paymentMethods.find(m => m.id === selectedMethod)?.logo}
+          <span>{paymentMethods.find(m => m.id === selectedMethod)?.name}</span>
+          <svg className={`arrow ${isOpen ? 'open' : ''}`} viewBox="0 0 24 24" width="24" height="24">
+            <path d="M7 10l5 5 5-5z" />
+          </svg>
+        </button>
+        
+        {isOpen && (
+          <div className="dropdown-menu">
+            
+            {paymentMethods.map((method) => (
+              <button
+                key={method.id}
+                className={`dropdown-item ${selectedMethod === method.id ? 'selected' : ''}`}
+                onClick={() => selectMethod(method.id)}
+              >
+                <div className="payment-logo">{method.logo}</div>
+                <span className="payment-name">{method.name}</span>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {/* //another componet of this form  */}
+        <div className="form-container">
+          <div className="input-group">
             <input
               type="text"
+              id="name"
               value={name}
               onChange={handleNameChange}
-              placeholder="Enter your name"
-              className="address-of-user"
-              style={{padding:'10px',margin:'10px',letterSpacing:'3px',width:'90%',maxWidth:'100%'}}
+              className={`form-input ${nameError ? 'input-error' : name ? 'input-success' : ''}`}
+              placeholder=" "
               required
             />
-            {nameError && <span className="error" style={{color: 'red', fontSize: '12px', display: 'block'}}>{nameError}</span>}
+            <label htmlFor="name" className="input-label" >Full Name</label>
+            {nameError && <span className="error-text">{nameError}</span>}
           </div>
 
-          <div className="phone-container">
-            <label>Phone: </label>
-            <br />
+          <div className="input-group">
             <input
-              type="text"
+              type="tel"
+              id="phone"
               value={phone}
               onChange={handlePhoneChange}
-              placeholder="Enter your phone number"
-              className="address-of-user"
-              style={{padding:'10px',margin:'10px',letterSpacing:'3px',width:'90%',maxWidth:'100%'}}
+              className={`form-input ${phoneError ? 'input-error' : phone ? 'input-success' : ''}`}
+              placeholder=" "
               required
             />
-            {phoneError && <span className="error" style={{color: 'red', fontSize: '12px', display: 'block'}}>{phoneError}</span>}
-          </div>
-          
-
-          <label>Address:</label>
-          <div className="address-container" style={{display:'flex',height:'auto'}}>
-            <input
-              type="text"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="Enter your address"
-              className="address-of-user"
-              style={{padding:'10px',margin:'10px',letterSpacing:'3px',width:'47%',maxWidth:'100%'}}
-              required
-            />
-
-            <button 
-              type="button" 
-              className="location-btn" 
-              onClick={fetchCurrentLocation}
-              style={{padding:'10px',margin:'10px',letterSpacing:'3px',width:'40%'}}
-            >
-              Current Location
-            </button>
+            <label htmlFor="phone" className="input-label">Phone Number</label>
+            {phoneError && <span className="error-text">{phoneError}</span>}
           </div>
 
-          <label>Email:</label>
-          <div className="email-container">
-            <input
-              type="email"
-              value={email}
-              onChange={handleEmailChange}
-              placeholder="Enter your email"
-              className="address-of-user"
-              style={{padding:'10px',margin:'10px',letterSpacing:'3px',width:'47%',maxWidth:'100%'}}
-              required
-      
-            />
-            <button 
-              type="button"
-              onClick={handleSendOtp}
-              disabled={isLoading || !email || emailError}
-              style={{
-                padding:'10px',
-                margin:'10px',
-                letterSpacing:'3px',
-                width:'40%',
-                fontSize:'10px',
-                opacity: (isLoading || !email || emailError) ? 0.7 : 1,
-                cursor: (isLoading || !email || emailError) ? 'not-allowed' : 'pointer'
-              }}
-            >
-              {isLoading ? 'Sending...' : 'Send OTP'}
-            </button>
+          <div className="input-group">
+            <div className="address-group">
+              <input
+                type="text"
+                id="address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                className="form-input"
+                placeholder=" "
+                required
+              />
+              <label htmlFor="address" className="input-label">Address</label>
+              <button 
+                type="button" 
+                className="location-btn"
+                onClick={fetchCurrentLocation}
+                aria-label="Get current location"
+              >
+                <MapPin />
+              </button>
+            </div>
           </div>
-          {emailError && <span className="error" style={{color: 'red', fontSize: '12px', display: 'block'}}>{emailError}</span>}
 
+
+
+
+
+          <div className="input-group">
+            <div className="email-group">
+              <div className='emailwithotp' style={{ width: '', position: 'relative' }}>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  className={`form-input ${emailError ? 'input-error' : email ? 'input-success' : ''}`}
+                  placeholder=" "
+                  required
+                  style={{width:''}}
+                />
+                <label htmlFor="email" className="input-label">Email Address</label>
+              </div>
+              <button 
+                type="button"
+                className={`otp-button ${isLoading ? 'loading-state' : ''}`}
+                onClick={handleSendOtp}
+                disabled={isLoading || !email || emailError}
+              >
+                {isLoading ? 'Sending...' : 'Send OTP'}
+              </button>
+            </div>
+            {emailError && <span className="error-text">{emailError}</span>}
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {/* from here final stage of order conferm state */}
           {otpSent && !otpVerified && (
             <>
               <label>Enter OTP:</label>
@@ -474,7 +726,6 @@ const Payment = () => {
                   type="text"
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
-                  style={{padding:'10px',marginLeft:'-10px',letterSpacing:'3px',width:'47%',height:'15px'}}
                   placeholder="Enter OTP"
                 />
                 <button 
@@ -482,11 +733,6 @@ const Payment = () => {
                   onClick={handleVerifyOtp}
                   disabled={isLoading || !otp}
                   style={{
-                    padding:'10px',
-                    margin:'10px',
-                    marginLeft:'20px',
-                    letterSpacing:'3px',
-                    width:'40%',
                     opacity: (isLoading || !otp) ? 0.7 : 1,
                     cursor: (isLoading || !otp) ? 'not-allowed' : 'pointer'
                   }}
@@ -508,34 +754,17 @@ const Payment = () => {
             onClick={handlePaymentSubmission}
             disabled={!otpVerified || isLoading}
             style={{
-              padding:'10px',
-              margin:'10px',
-              letterSpacing:'3px',
-              width:'87%',
-              marginTop:'20px',
-              color:'white',
-              backgroundColor: (!otpVerified || isLoading) ? 'black' : 'black',
+              backgroundColor: 'rgb(0,168,107)',
               cursor: (!otpVerified || isLoading) ? 'not-allowed' : 'pointer'
             }}
           >
-            {isLoading ? 'Processing...' : 'Submit Payment'}
+            {isLoading ? 'Processing...' : 'Submit Order'}
           </button>
 
-          {showNotification && (
-            <div className="notification-popup" style={{
-              position: 'fixed',
-              top: '20px',
-              right: '20px',
-              padding: '15px',
-              borderRadius: '5px',
-              boxShadow: '0 2px 5px rgba(0,0,0,0.2)',
-              backgroundColor:'black',
-              color:'white',
-              zIndex: 1000
-            }}>
-              order Conform
-            </div>
-          )}
+          <ToastContainer />
+
+          
+
         </div>
       </div>
     </div>

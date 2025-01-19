@@ -7,7 +7,7 @@ const Users = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('https://gshankarwenli.onrender.com/api/signups');
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/signups`);
         if (response.ok) {
           const data = await response.json();
           setUsers(data);
@@ -24,7 +24,7 @@ const Users = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`https://gshankarwenli.onrender.com/api/signups/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/signups/${id}`, {
         method: 'DELETE',
       });
 

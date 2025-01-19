@@ -23,7 +23,8 @@ const Profile = () => {
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch('https://gshankarwenli.onrender.com/profile', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/profile`, {
+
         method: 'GET',
         credentials: 'include',
       });

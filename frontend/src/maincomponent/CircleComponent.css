@@ -50,7 +50,7 @@
   width: auto;
   min-width: min-content;
   /* margin-left: 20px; */
-  justify-content: space-around;
+  /* justify-content: space-around; */
 }
 
 .circle-border {
@@ -222,8 +222,8 @@
   }
 
   .category-scroll {
-    margin-left: -10px;
-    gap: 35px;
+    margin-left: -1px;
+    gap: 15px;
     padding: 0 12px;
   }
 

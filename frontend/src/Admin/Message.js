@@ -12,7 +12,8 @@ function Message() {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await axios.get('https://gshankarwenli.onrender.com/api/messages');
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/messages`);
+
         setMessages(response.data);
       } catch (error) {
         setError('Failed to fetch messages.');
@@ -30,7 +31,7 @@ function Message() {
     const email = messages[currentMessageId].email;
 
     try {
-      await axios.post('https://gshankarwenli.onrender.com/api/reply', {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/reply`, {
         email: email,
         message: replyMessage,
       });

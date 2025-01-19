@@ -51,7 +51,8 @@ const LoginPage = ({ setToken, setIsAdmin }) => {
       }
 
       // Authenticate with backend
-      const response = await axios.post('https://gshankarwenli.onrender.com/login', { firstname, password });
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, { firstname, password });
+
       const { token } = response.data;
 
       // Decode the token

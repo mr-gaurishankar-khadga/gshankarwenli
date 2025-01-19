@@ -16,7 +16,8 @@ const SearchedProduct = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const baseURL = 'https://gshankarwenli.onrender.com'; 
+  const baseURL = process.env.REACT_APP_BACKEND_URL;
+
 
   // Get the search query from the URL
   const query = new URLSearchParams(location.search).get('query') || '';

@@ -22,7 +22,8 @@ const ContactPage = () => {
     setSuccess(null);
     
     try {
-      const response = await axios.post('https://gshankarwenli.onrender.com/api/messages', { 
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/messages`, {
+
         name, 
         email, 
         message 

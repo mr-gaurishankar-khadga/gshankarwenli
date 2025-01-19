@@ -30,7 +30,7 @@ const Loginwithgoogle = () => {
     const top = window.screen.height / 2 - height / 2;
 
     const loginWindow = window.open(
-      'https://gshankarwenli.onrender.com/auth/google',
+      `${process.env.REACT_APP_BACKEND_URL}/auth/google`,
       '_blank',
       `width=${width},height=${height},top=${top},left=${left}`
     );
@@ -44,7 +44,7 @@ const Loginwithgoogle = () => {
   };
 
   const logout = () => {
-    fetch('https://gshankarwenli.onrender.com/logout', {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/logout`, {
       method: 'GET',
       credentials: 'include',
     }).then(() => {
