@@ -35,7 +35,7 @@ router.post('/', upload.fields([
       hsn_code, 
       sku, 
       weight,
-      dimensions 
+      dimensions,
     } = req.body;
 
     const frontImage = req.files['front'] ? req.files['front'][0].path : null;
@@ -120,7 +120,8 @@ router.put('/:id', upload.fields([
       hsn_code, 
       sku, 
       weight,
-      dimensions 
+      dimensions ,
+
     } = req.body;
 
     const frontImage = req.files && req.files['front'] ? req.files['front'][0].path : req.body.existingFrontImage;

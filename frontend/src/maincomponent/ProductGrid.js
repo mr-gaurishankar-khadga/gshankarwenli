@@ -109,7 +109,9 @@ const ProductGrid = ({ searchQuery = '', user }) => {
 
   return (
     <div className="product-grid" >
-      <h2>New Arrivals</h2>
+      <h2 style={{margin:'20px'}}>New Arrivals</h2>
+
+      <br />
       <div className="products" >
         <Suspense fallback={<p>Loading products...</p>}>
           {products.map((product, index) => (
@@ -184,20 +186,20 @@ const ProductCard = React.memo(({ product, index, hoveredIndex, setHoveredIndex,
 
 
       <div className="product-details">
-        <h3 style={{fontSize:'10px',borderBottom:'2px solid skyblue',width:'7%',}}>Wenli</h3>
-        <h3 style={{ fontFamily: 'Twentieth Century',fontSize:'16px' }}>{product.title}</h3>
-        <div className="price">
-          <span className="current-price" style={{ fontFamily: 'Twentieth Century sans-serif',fontSize:'13px' }}>
-            Rs. {product.price}
-          </span>
+        <h2>BOMBAY PAISLEY</h2>
+        <h3>{product.title}</h3>
+        <div className="prices">
+          <p className="current-price">
+          ₹ {product.price}
+          </p>
         </div>
 
 
-        <div className="rating" style={{marginLeft:''}}>
+        {/* <div className="rating" style={{marginLeft:''}}>
           {[...Array(5)].map((_, i) => (
             <span key={i}><GradeIcon className="ratingicon" /></span>
           ))}
-        </div>
+        </div> */}
 
 
         <div className="Size-options" style={{display:'none'}}>

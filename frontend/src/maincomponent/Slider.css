@@ -1,3 +1,8 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Raleway:wght@100..900&display=swap');
+
+
 .slider-container {
   position: relative;
 
@@ -93,26 +98,28 @@
   padding: 0;
   text-align: center;
   z-index: 1000;
+  margin-top: 200px;
 }
 
 .slick-dots li {
   display: inline-block;
-  margin: 0 15px !important;
+  margin: 0 17px !important;
   padding: 0;
 }
 
 .slick-dots li button {
-  gap: 10px;
+  gap: 13px;
   width: 40px !important;
-  height: 10px !important;
+  height: 6px !important;
   padding: 0 !important;
-  border: 2px solid rgb(23, 244, 115) !important;
-  border-radius: 120px;
+  border: 1px solid rgb(23, 25, 24) !important;
+  /* border-radius: 120px; */
   background-color: transparent;
   text-indent: -9999px;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: -100px;
+  background-color: rgb(53, 51, 51);
 }
 
 .slick-dots li button:before {
@@ -121,7 +128,7 @@
 }
 
 .slick-dots li.slick-active button {
-  background-color: skyblue;
+  background-color: black;
   transform: scale(1.2);
 }
 
@@ -145,6 +152,7 @@
   font-size: 2em;
   margin-bottom: 20px;
   animation: fadeIn 2s ease-in;
+  font-family: 'Inter', sans-serif;
 }
 
 .bottom-content p {

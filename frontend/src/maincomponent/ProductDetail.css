@@ -1,11 +1,11 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Raleway:wght@100..900&display=swap');
 
 .product-detail-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     animation: fadeIn 1s ease-in-out;
-
   }
   
   @keyframes fadeIn {
@@ -150,7 +150,6 @@
   
   .current-price {
     font-size: 24px;
-    font-weight: bold;
   }
   
   .original-price {
@@ -264,7 +263,6 @@
   .product-tabs span:hover,
   .product-tabs span.active {
     color: #333;
-    font-weight: bold;
   }
   
 
@@ -295,9 +293,7 @@
   }
   
   .Size-options button {
-    background-color: #f4f4f4;
     border: 1px solid #ddd;
-    border-radius: 5px;
     padding: 10px 20px;
     font-size: 1em;
     color: #333;
@@ -308,8 +304,6 @@
   
   .Size-options button:hover {
     background-color: #e0e0e0;
-    transform: scale(1.1);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
   }
   
   .Size-options button:active {
@@ -338,9 +332,7 @@
     }
     
     .Size-options button {
-      background-color: #f4f4f4;
       border: 1px solid #ddd;
-      border-radius: 5px;
       padding: 5px 10px;
       font-size: 1em;
       color: #333;
@@ -351,13 +343,10 @@
     
     .Size-options button:hover {
       background-color: #e0e0e0;
-      transform: scale(1.1);
-      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
     }
     
     .Size-options button:active {
       background-color: #ccc;
-      transform: scale(1);
     }
 
   }
@@ -386,36 +375,35 @@
     margin-bottom: 10px;
     color: #333;
   }
+  .sizetap {
+    margin-top: 50px;
+  }
   
   .Size-optionsx {
     display: flex;
-    gap: 10px;
+    gap: 15px;
     max-width: 55%;
   }
   
   .Size-optionsx button {
-    background-color: #f4f4f4;
-    border: 1px solid #ddd;
-    border-radius: 15px;
-    padding: 12px 32px;
+    background-color: white;
     font-size: 1em;
-    color: #333;
+    color: black;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .Size-optionsx button:hover {
-    background-color: #e0e0e0;
-    transform: scale(1.1);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .Size-optionsx button:active {
-    background-color: #ccc;
-    transform: scale(1);
-  }
-  
+    border: none;
+
+    font-size: 16px;
+    line-height: 22.2px;
+    font-weight:normal;
+    opacity: 80%;
+    letter-spacing: 1px;
+    color: rgb(18, 18, 18);
+}
+
+.Size-optionsx button:focus {
+  border: 2px solid black; 
+  outline: none;
+}
 
 
 
@@ -424,7 +412,6 @@
     .Size-optionx {
       margin: 30px 0;
       max-width: 93%;
-      /* background-color: red; */
       
     }
     
@@ -437,13 +424,11 @@
     .Size-optionsx {
       display: flex;
       gap: 5px;
-      max-width: 90%;
+      max-width: 100%;
     }
     
     .Size-options button {
-      background-color: #f4f4f4;
       border: 1px solid #ddd;
-      border-radius: 5px;
       padding: 5px 18px;
       font-size: 1em;
       color: #333;
@@ -454,9 +439,6 @@
     
     .Size-options button:hover {
       width: 10px;
-      background-color: #e0e0e0;
-      transform: scale(1.1);
-      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
     }
     
     .Size-options button:active {
@@ -466,3 +448,7 @@
 
   }
   
+
+
+
+

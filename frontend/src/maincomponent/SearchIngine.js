@@ -61,10 +61,11 @@ const SearchIngine = () => {
       borderRadius: '0%',
       height: '60px', 
       width: '60px',
+      background:'none'
     },
     searchIcon: {
-      width: '24px',
-      height: '24px',
+      width: '23px',
+      height: '23px',
       opacity: '0.5',
       transition: 'all 0.3s ease-in-out',
     },
@@ -100,7 +101,7 @@ const SearchIngine = () => {
             e.currentTarget.style.backgroundColor = 'transparent';
           }}
         >
-          <LucideSearch style={styles.searchIcon} />
+          <LucideSearch style={{backgroundColor:'',marginTop:'-8px',opacity:'70%'}}/>
         </button>
       </div>
     </form>

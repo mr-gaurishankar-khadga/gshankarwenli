@@ -62,7 +62,7 @@ import CustomerReviews from './maincomponent/CustomerReviews';
 
 import { Search as LucideSearch } from 'lucide-react';
 
-import { UserRound } from 'lucide-react';
+import { User } from 'lucide-react';
 
 import { ShoppingCart as LucidShoppingCart } from 'lucide-react';
 
@@ -160,8 +160,8 @@ const App = () => {
       <nav className="navbar" style={{background:'',height:'70px'}}>
 
         {/* Desktop View */}
-        <div className="nav-desktop" style={{height:'80px'}}>
-          <img src={Logo} alt="" className="" style={{ height: '200px', width: '250px', marginTop: '0', marginLeft: '20px' }} />
+        <div className="nav-desktop" style={{height:'70px'}}>
+          <img src={Logo} alt="" className="" style={{ height: '180px', width: '250px', marginTop: '0', marginLeft: '20px' }} />
           <ul className="nav-links">
             <li><Link to="/ContactPage" style={{justifyContent:'space-between',letterSpacing:'2px'}}>Contact</Link></li>
             <li><Link to="/HomePage" style={{justifyContent:'space-between',letterSpacing:'2px'}}>Home</Link></li>
@@ -175,11 +175,11 @@ const App = () => {
           </li>
 
           <li style={{marginTop:'-10px',marginLeft:'0'}}>
-            <UserRound style={{ color: 'black', cursor: 'pointer',height:'30px',width:'30px',opacity:'50%' }} onClick={handleAccountClick} />
+            <User style={{ color: 'black', cursor: 'pointer',height:'26px',width:'26px',opacity:'70%',fontWeight:'400' }} onClick={handleAccountClick} />
           </li>
 
           <li onClick={handleShopClick} style={{marginTop:'-10px',marginRight:'50px'}}>
-            <LucidShoppingCart itemCount={totalProducts} titleAccess='ShoppingCart' style={{ cursor: 'pointer',height:'29px',width:'29px',opacity:'50%' }}/>
+            <LucidShoppingCart itemCount={totalProducts} titleAccess='ShoppingCart' style={{ cursor: 'pointer',height:'26px',width:'26px',opacity:'70%' }}/>
           </li>
         </ul>
       </div>
@@ -293,16 +293,16 @@ const App = () => {
           <div className="rightside" style={{textAlign:'right',width:'100%'}}> 
 
 
-          {/* <IconButton className="more-button">
+          <IconButton className="more-button">
             <AddShoppingCartIcon style={{color:'black',color: 'black',  width: '30px',  height: '30px'}}/>
-          </IconButton> */}
+          </IconButton>
           </div>
 
 
 
-          <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, background: '#fff', padding: '1rem', boxShadow: '0 -2px 10px rgba(0,0,0,0.1)', transition: 'transform 0.5s ease-in-out', transform: visible ? 'translateY(0)' : 'translateY(260%)', zIndex: 1000 }}>
+          {/* <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, background: '#fff', padding: '1rem', boxShadow: '0 -2px 10px rgba(0,0,0,0.1)', transition: 'transform 0.5s ease-in-out', transform: visible ? 'translateY(0)' : 'translateY(260%)', zIndex: 1000 }}>
             <BottomBar/>
-          </div>
+          </div> */}
 
 
 

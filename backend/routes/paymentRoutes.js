@@ -50,18 +50,46 @@ router.post('/', async (req, res) => {
       to: email,
       subject: 'Payment Confirmation',
       html: `
-        <div style="font-family: Arial, sans-serif; padding: 20px;">
-          <h2>Payment Confirmation</h2>
-          <p>Thank you for your payment of Rs.${price}</p>
-          <p>Order details:</p>
-          <ul>
-            <li>Product: ${product.title}</li>
-            <li>Quantity: ${quantity}</li>
-            <li>Payment Method: ${paymentMethod}</li>
-          </ul>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+          <div style="background-color: #007bff; color: #fff; padding: 20px; text-align: center;">
+            <img src='' alt="Brand Logo" style="max-height: 50px; margin-bottom: 10px;">
+            <h1 style="margin: 0; font-size: 24px;">Your Brand Name</h1>
+          </div>
+          <div style="padding: 20px;">
+            <h2 style="color: #333;">Payment Confirmation</h2>
+            <p style="font-size: 16px; color: #555;">Thank you for your payment of <strong>Rs.${price}</strong>. Your order details are as follows:</p>
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+              <thead>
+                <tr style="background-color: #f5f5f5; text-align: left;">
+                  <th style="padding: 10px; border-bottom: 1px solid #ddd;">Item</th>
+                  <th style="padding: 10px; border-bottom: 1px solid #ddd;">Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 10px; border-bottom: 1px solid #ddd;">Product</td>
+                  <td style="padding: 10px; border-bottom: 1px solid #ddd;">${product.title}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px; border-bottom: 1px solid #ddd;">Quantity</td>
+                  <td style="padding: 10px; border-bottom: 1px solid #ddd;">${quantity}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px; border-bottom: 1px solid #ddd;">Payment Method</td>
+                  <td style="padding: 10px; border-bottom: 1px solid #ddd;">${paymentMethod}</td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="font-size: 16px; color: #555;">If you have any questions about your order, please contact us at <a href="mailto:support@yourbrand.com" style="color: #007bff;">support@yourbrand.com</a>.</p>
+          </div>
+          <div style="background-color: #f5f5f5; color: #555; padding: 10px; text-align: center;">
+            <p style="font-size: 14px; margin: 0;">Your Brand Name, Your Address, Your City, Your Country</p>
+            <p style="font-size: 14px; margin: 0;">&copy; ${new Date().getFullYear()} Your Brand Name. All rights reserved.</p>
+          </div>
         </div>
       `
     };
+    
 
     await transporter.sendMail(mailOptions);
 
@@ -123,14 +151,26 @@ router.post('/send-payment-otp', async (req, res) => {
       to: email,
       subject: 'Payment Verification OTP',
       html: `
-        <div style="font-family: Arial, sans-serif; padding: 20px;">
-          <h2>Payment Verification OTP</h2>
-          <p>Your OTP for payment verification is:</p>
-          <h1 style="color: #4CAF50; letter-spacing: 5px;">${otp}</h1>
-          <p>This OTP will expire in 5 minutes.</p>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+          <div style="background-color:black; color: #fff; padding: 20px; text-align: center;">
+            <img src="/images/WENLI.svg" alt="Brand Logo" style="max-height: 50px; margin-bottom: 10px;">
+            <h1 style="margin: 0; font-size: 24px; font-family: 'Roboto', sans-serif;">Your Brand Name</h1>
+          </div>
+          <div style="padding: 30px; text-align: center;">
+            <h2 style="color: #333; font-size: 28px; font-family: 'Roboto', sans-serif; margin-bottom: 10px;">Payment Verification OTP</h2>
+            <p style="font-size: 16px; color: #555; margin-bottom: 20px;">We received a request to verify your payment. Please use the following OTP to complete your transaction:</p>
+            <h1 style="color: #4CAF50; font-size: 40px; letter-spacing: 5px; font-family: 'Arial', sans-serif; font-weight: bold; margin: 0;">${otp}</h1>
+            <p style="font-size: 16px; color: #555; margin-top: 20px;">This OTP will expire in 5 minutes.</p>
+            <p style="font-size: 16px; color: #555; margin-top: 10px;">If you did not request this, please ignore this email.</p>
+          </div>
+          <div style="background-color: #f5f5f5; color: #555; padding: 10px; text-align: center;">
+            <p style="font-size: 14px; margin: 0;">Your Brand Name, Your Address, Your City, Your Country</p>
+            <p style="font-size: 14px; margin: 0;">&copy; ${new Date().getFullYear()} Your Brand Name. All rights reserved.</p>
+          </div>
         </div>
       `
     };
+    
 
     await transporter.sendMail(mailOptions);
     

@@ -45,87 +45,88 @@ const productSchema = new mongoose.Schema({
 
 
   //second
-  dimensions:{
-    length:{
-      type:Number,required:true
-    },
-    width:{
-      type:Number,required:true
-    },
-    height:{
-      type:Number,required:true
-    },
-    unit:{
-      type:String,default:'cm',
-      enum:['cm','inch']
-    }
-  },
+  // dimensions:{
+  //   length:{
+  //     type:Number,required:true
+  //   },
+  //   width:{
+  //     type:Number,required:true
+  //   },
+  //   height:{
+  //     type:Number,required:true
+  //   },
+  //   unit:{
+  //     type:String,default:'cm',
+  //     enum:['cm','inch']
+  //   }
+  // },
 
 
 
   //third
-  inventory:{
-    stock_quantity:{
-      type:Number,required:true
-    },
-    low_stock_threshold: {
-      type: Number,
-      default: 10,
-    },
-    manage_inventory: {
-      type: Boolean,
-      default: true
-    }
-  },
+  // inventory:{
+  //   stock_quantity:{
+  //     type:Number,required:true
+  //   },
+  //   low_stock_threshold: {
+  //     type: Number,
+  //     default: 10,
+  //   },
+  //   manage_inventory: {
+  //     type: Boolean,
+  //     default: true
+  //   }
+  // },
 
 
   //fourth
-  shipping_details: {
-    is_returnable: {
-      type: Boolean,
-      default: false
-    },  
-    package_dimensions: {
-      length: Number,
-      width: Number,
-      height: Number,
-      unit: {
-        type: String,
-        default: 'cm',
-        enum: ['cm', 'inch']
-      }
-    },
-    shipping_mode: {
-      type: String,
-      required: [true, 'Shipping mode is required'],
-      enum: ['Standard', 'Express']
-    },
-    origin_pincode: {
-      type: String,
-      required: [true, 'Origin pincode is required'],
-      trim: true
-    },
-    pickup_location: String
-  },
+  // shipping_details: {
+  //   is_returnable: {
+  //     type: Boolean,
+  //     default: false
+  //   },  
+  //   package_dimensions: {
+  //     length: Number,
+  //     width: Number,
+  //     height: Number,
+
+  //     unit: {
+  //       type: String,
+  //       default: 'cm',
+  //       enum: ['cm', 'inch']
+  //     }
+  //   },
+  //   shipping_mode: {
+  //     type: String,
+  //     required: [true, 'Shipping mode is required'],
+  //     enum: ['Standard', 'Express']
+  //   },
+  //   origin_pincode: {
+  //     type: String,
+  //     required: [true, 'Origin pincode is required'],
+  //     trim: true
+  //   },
+  //   pickup_location: String
+  // },
 
 
 
-  tax_details: {
-    gst_percentage: {
-      type: Number,
-      required: [true, 'GST percentage is required'],
-      min: 0,
-      max: 100
-    },
-    hsn_code: String
-  },
+  // tax_details: {
+  //   gst_percentage: {
+  //     type: Number,
+  //     required: [true, 'GST percentage is required'],
+  //     min: 0,
+  //     max: 100
+  //   },
+  //   hsn_code: String
+  // },
 
 
-  status: {
-    type: String,
-    enum: ['active', 'inactive', 'draft'],
-    default: 'draft'
-  }
+  // status: {
+  //   type: String,
+  //   enum: ['active', 'inactive', 'draft'],
+  //   default: 'draft'
+  // }
 
 });
 

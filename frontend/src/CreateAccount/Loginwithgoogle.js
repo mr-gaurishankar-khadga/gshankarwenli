@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Typography, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import './Loginwithgoogle.css'; 
-
+import google from './images/google.svg';
 const Loginwithgoogle = () => {
   const [user, setUser] = useState(null);
 
@@ -53,7 +53,7 @@ const Loginwithgoogle = () => {
   };
 
   return (
-    <div className="login-container">
+    <div className="" style={{width:'200px'}}>
       {user ? (
         <div className="user-details">
           <Typography variant="h4" gutterBottom>
@@ -68,14 +68,8 @@ const Loginwithgoogle = () => {
           </Button>
         </div>
       ) : (
-        <div className="google-login-btn" onClick={login} style={{ marginTop: '-10px' }}>
-          <Button
-            variant="outlined"
-            startIcon={<GoogleIcon style={{ color: 'rgb(112,112,112)' }} />}
-            className="google-button"
-          >
-            Login with Google
-          </Button>
+        <div className="google-login-btn" onClick={login} style={{ marginTop: '-10px',border:''}}>
+          <img src={google} alt="Google" className="social-icon" style={{width:'100%',border:'1px solid black'}}/> 
         </div>
       )}
     </div>

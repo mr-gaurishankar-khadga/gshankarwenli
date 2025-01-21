@@ -63,7 +63,7 @@
   left: 0;
   width: 40px;
   height: 3px;
-  background: linear-gradient(90deg, #6c5ce7 0%, #a8a4e6 25%, #74b9ff 50%, #00cec9 75%, #55efc4 100%);
+  /* background: linear-gradient(90deg, #6c5ce7 0%, #a8a4e6 25%, #74b9ff 50%, #00cec9 75%, #55efc4 100%); */
   background: linear-gradient(90deg, #6c5ce7, #a29bfe, #81ecec, #74b9ff, #00cec9, #55efc4, #fab1a0);
 
 

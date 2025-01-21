@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Raleway:wght@100..900&display=swap');
+
+
+
+
 
 .payment-view {
   width: 600px;
@@ -27,7 +32,7 @@
 }
 
 .checkout-page-header {
-  padding: 16px 20px;
+  margin: 10px;
   background: #ffffff;
   border-bottom: 1px solid #f0f0f0;
 }
@@ -43,7 +48,6 @@
   border: none;
   padding: 8px;
   cursor: pointer;
-  font-size: 20px;
   color: #333;
   display: flex;
   align-items: center;
@@ -56,10 +60,11 @@
 }
 
 .company-logo-text {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: normal;
   margin-left: 12px;
   color: #1a1a1a;
+  opacity: 70%;
 }
 
 .order-total-summary-section {
@@ -71,33 +76,8 @@
   user-select: none;
 }
 
-.order-total-content-wrapper {
-  display: flex;
-  justify-content: space-between;
-  flex-grow: 1;
-  margin-right: 16px;
-}
 
-.order-total-label-text {
-  color: #666;
-  font-size: 15px;
-}
 
-.order-total-amount-text {
-  font-weight: 600;
-  color: #1a1a1a;
-  font-size: 15px;
-}
-
-.expandable-toggle-icon {
-  font-size: 12px;
-  color: #666;
-  transition: transform 0.3s ease;
-}
-
-.expandable-toggle-icon-rotated {
-  transform: rotate(180deg);
-}
 
 .promotional-discount-banner {
   background: #1a1a1a;
@@ -105,6 +85,7 @@
   padding: 12px 20px;
   text-align: center;
   font-size: 14px;
+  font-weight: normal;
   letter-spacing: 0.2px;
 }
 
@@ -146,15 +127,16 @@
   width: 100%;
   flex-grow: 1;
   margin-top: 10px;
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .product-title-heading {
   margin: 0;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: normal;
   color: #1a1a1a;
   margin-bottom: 4px;
+  opacity: 80%;
 }
 
 .product-variant-description {
@@ -166,7 +148,8 @@
 .product-price-amount {
   font-weight: 600;
   color: #1a1a1a;
-  font-size: 15px;
+  font-size: 14px;
+  opacity: 80%;
 }
 
 .order-summary-breakdown-section {
@@ -188,15 +171,15 @@
 }
 
 .shipping-calculation-status {
-  color: #666;
-  font-style: italic;
+  color: #1a1a1a;
+  font-style: normal;
 }
 
 .order-summary-row-container.order-summary-row-total {
   margin-top: 16px;
   padding-top: 16px;
   border-top: 1px solid #f0f0f0;
-  font-weight: 600;
+  font-weight: normal;
   font-size: 16px;
   color: #1a1a1a;
 }
@@ -267,11 +250,12 @@
   height: 48px;
   padding: 8px 16px;
   font-size: 14px;
-  border: 1.5px solid var(--border-color);
   border-radius: 8px;
-  background: var(--input-background);
-  color: var(--text-color);
   transition: all 0.2s ease;
+  opacity: 80%;
+  font-weight: normal;
+  color: rgb(18, 18, 18);
+  font-family: 'Inter', sans-serif;
 }
 
 
@@ -424,4 +408,15 @@
   margin-left: 15px;
  }
 
+}
+
+
+
+.payment-method-title {
+  line-height: 25.2px;
+  font-weight: normal;
+  color: rgb(18, 18, 18);
+  opacity: 80%;
+  font-size: 18px;
+  letter-spacing: 0.6px;
 }

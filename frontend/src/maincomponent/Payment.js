@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import QRCode from 'qrcode.react';
 import {MapPin, SendHorizontal} from 'lucide-react'
 import './Payment.css';
 import './PaymentSelector.css';
+
+import paytm from './images/paytm.svg'
+import gpay from './images/gpay.svg'
+import phonepay from './images/phonepay.svg'
 
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -28,6 +32,14 @@ const Payment = () => {
   const [otpVerified, setOtpVerified] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+
+
+  //navigate to back
+  const navigate = useNavigate();
+
+  const handleBackClick = () => {
+    navigate(-1); // Navigate to the previous page
+  };
 
 
 
@@ -340,46 +352,43 @@ const Payment = () => {
         </svg>
       )
     },
-    // {
-    //   id: 'visa',
-    //   name: 'VISA',
-    //   logo: (
-    //     <svg viewBox="0 0 1000 324" width="40" height="25">
-    //       <path fill="#1434CB" d="M651.19,0.39h-99.54c-18.56,0-32.45,5.13-40.65,23.89L408.4,321.05h99.54c0,0,11.95-31.45,14.64-38.34c8,0,79.14,0.11,89.33,0.11c2.07,8.89,8.48,38.23,8.48,38.23h87.97L651.19,0.39z M541.79,214.33c5.77-14.76,27.77-71.68,27.77-71.68c-0.41,0.67,5.72-14.83,9.23-24.44l4.7,21.93c0,0,13.31,61.17,16.12,74.19H541.79z"/>
-    //       <path fill="#1434CB" d="M895.22,0.39h-76.42c-17.43,0-27.33,9.48-34.09,20.13L656.64,321.05h99.54l18.12-49.86h111.04l10.46,49.86h87.97L895.22,0.39z M798.04,204.76c7.16-18.27,34.56-88.19,34.56-88.19c-0.48,0.79,7.12-18.31,11.48-30.25l5.85,27.22c0,0,16.55,75.77,20.04,91.22H798.04z"/>
-    //       <path fill="#1434CB" d="M285.2,0.39L190.06,219.52l-10.15-50.87c-17.72-57.04-72.98-118.72-134.87-149.6l87.03,301.61l102.93-0.41L377.23,0.39H285.2z"/>
-    //       <path fill="#F7B600" d="M131.52,0.39H0.46l-0.84,4.93c101.56,24.55,168.86,83.93,196.67,155.33L168.27,23.71C163.1,4.33,148.56,0.81,131.52,0.39z"/>
-    //     </svg>
-    //   )
-    // },
+
     {
       id: 'phonepe',
       name: 'PhonePe',
       logo: (
-        <svg viewBox="0 0 24 24" width="25" height="25">
-          <path fill="#5F259F" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z"/>
-          <path fill="#5F259F" d="M8.5 7v10l8.5-5z"/>
-        </svg>
+        <img
+          src={phonepay}
+          alt="PhonePe"
+          width="25"
+          height="25"
+        />
       )
     },
     {
       id: 'googlepay',
       name: 'GooglePay',
       logo: (
-        <svg viewBox="0 0 24 24" width="25" height="25">
-          <path fill="#4285F4" d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12c6.627 0 12-5.373 12-12S18.627 0 12 0zm.14 19.018c-3.868 0-7-3.14-7-7.018c0-3.878 3.132-7.018 7-7.018c1.89 0 3.47.697 4.682 1.829l-1.974 1.978v-.004c-.735-.702-1.667-1.062-2.708-1.062c-2.31 0-4.187 1.956-4.187 4.273c0 2.315 1.877 4.277 4.187 4.277c2.096 0 3.522-1.202 3.816-2.852H12.14v-2.737h6.585c.088.47.135.96.135 1.474c0 4.01-2.677 6.86-6.72 6.86z"/>
-        </svg>
+        <img
+          src={gpay}
+          alt="GooglePay"
+          width="25"
+          height="25"
+        />
       )
     },
     {
       id: 'paytm',
       name: 'Paytm',
       logo: (
-        <svg viewBox="0 0 24 24" width="25" height="25">
-          <path fill="#00BAF2" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm1.5 16.5h-3v-9h3v9zm4.5-6h-3v6h3v-6z"/>
-        </svg>
+        <img
+          src={paytm}
+          alt="Paytm"
+          width="25"
+          height="25"
+        />
       )
-    }
+    },
   ];
 
   const toggleDropdown = () => {
@@ -415,28 +424,14 @@ const Payment = () => {
             </div>
 
             <header className="checkout-page-header">
-              <div className="navigation-section-container">
-                <button className="navigation-back-button">
-                  <span> ← </span>
-                </button>
-                <div className="company-logo-text">WENLI</div>
-              </div>
-              
-              <div 
-                className="order-total-summary-section"
-                onClick={() => setIsExpanded(!isExpanded)}
-              >
-                <div className="order-total-content-wrapper">
-                  <span className="order-total-label-text">Order total</span>
-                  <span className="order-total-amount-text">₹{product.price * quantity}</span>
-                </div>
-                <span className={`expandable-toggle-icon ${isExpanded ? 'expandable-toggle-icon-rotated' : ''}`}>
-                  ▼
-                </span>
-              </div>
+            <div className="navigation-section-container">
+              <button className="navigation-back-button" onClick={handleBackClick}>
+                <span> ← </span>
+              </button>
+              <div className="company-logo-text">Back</div>
+            </div>
             </header>
-
-            {isExpanded && (
+            
               <div className="expanded-details-container">
                 <div className="product-items-list-section">
                   <div className="product-item-card-container">
@@ -472,7 +467,7 @@ const Payment = () => {
                   </div>
                 </div>
               </div>
-            )}
+            {/* )} */}
           </div>
 
 
@@ -552,51 +547,50 @@ const Payment = () => {
 
 
 
-    <div className="payment-selector">
-      <h3 className="payment-method-title" style={{color:'rgb(0,168,107)'}}>Select Payment Method</h3>
-      
-      {/* Desktop View */}
-      <div className="desktop-view">
-        {paymentMethods.map((method) => (
-          <button
-            key={method.id}
-            className={`payment-option ${selectedMethod === method.id ? 'selected' : ''}`}
-            onClick={() => selectMethod(method.id)}
-            style={{border: '1px solid rgb(0,168,107)'}}
-          >
-            <div className="payment-logo">{method.logo}</div>
-            <span className="payment-name">{method.name}</span>
-          </button>
-        ))}
-      </div>
-
-      {/* Mobile View */}
-      <div className="mobile-view">
-        <button className="dropdown-toggle" onClick={toggleDropdown} style={{border: '1px solid rgb(0,168,107)'}}>
-          {paymentMethods.find(m => m.id === selectedMethod)?.logo}
-          <span>{paymentMethods.find(m => m.id === selectedMethod)?.name}</span>
-          <svg className={`arrow ${isOpen ? 'open' : ''}`} viewBox="0 0 24 24" width="24" height="24">
-            <path d="M7 10l5 5 5-5z" />
-          </svg>
-        </button>
-        
-        {isOpen && (
-          <div className="dropdown-menu">
-            
+        <div className="payment-selector">
+          <h3 className="payment-method-title">Select Payment Method</h3>
+          {/* Desktop View */}
+          <div className="desktop-view">
             {paymentMethods.map((method) => (
               <button
                 key={method.id}
-                className={`dropdown-item ${selectedMethod === method.id ? 'selected' : ''}`}
+                className={`payment-option ${selectedMethod === method.id ? 'selected' : ''}`}
                 onClick={() => selectMethod(method.id)}
+                style={{border: '1px solid #1a1a1a'}}
               >
                 <div className="payment-logo">{method.logo}</div>
                 <span className="payment-name">{method.name}</span>
               </button>
             ))}
           </div>
-        )}
-      </div>
-    </div>
+
+          {/* Mobile View */}
+          <div className="mobile-view">
+            <button className="dropdown-toggle" onClick={toggleDropdown} style={{border: '1px solid #1a1a1a'}}>
+              {paymentMethods.find(m => m.id === selectedMethod)?.logo}
+              <span>{paymentMethods.find(m => m.id === selectedMethod)?.name}</span>
+              <svg className={`arrow ${isOpen ? 'open' : ''}`} viewBox="0 0 24 24" width="24" height="24">
+                <path d="M7 10l5 5 5-5z" />
+              </svg>
+            </button>
+            
+            {isOpen && (
+              <div className="dropdown-menu">
+                
+                {paymentMethods.map((method) => (
+                  <button
+                    key={method.id}
+                    className={`dropdown-item ${selectedMethod === method.id ? 'selected' : ''}`}
+                    onClick={() => selectMethod(method.id)}
+                  >
+                    <div className="payment-logo">{method.logo}</div>
+                    <span className="payment-name">{method.name}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
 
 
 
@@ -754,7 +748,7 @@ const Payment = () => {
             onClick={handlePaymentSubmission}
             disabled={!otpVerified || isLoading}
             style={{
-              backgroundColor: 'rgb(0,168,107)',
+              backgroundColor: '#1a1a1a',
               cursor: (!otpVerified || isLoading) ? 'not-allowed' : 'pointer'
             }}
           >

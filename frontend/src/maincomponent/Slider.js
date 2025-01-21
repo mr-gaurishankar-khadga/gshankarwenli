@@ -61,7 +61,7 @@ const ZoomImageSlider = () => {
     cssEase: 'cubic-bezier(0.87, 0.03, 0.41, 0.9)'
   };
 
-  const images = [slider1, slider4, slider1, slider4, slider1, slider4];
+  const images = [slider1, slider4, slider1, slider4];
 
   const getSlideStyle = (index) => {
     if (index === 0 && initialLoad) {
@@ -97,14 +97,25 @@ const ZoomImageSlider = () => {
         </Slider>
       </div>
 
-      <div className="bottmCircle">
-        <CircleComponent/>
-      </div>
 
-      <div className="main-bottom-container" style={{marginTop:'20px'}}>
+      {/* <br />
+      <br />
+      <br />
+      <br /> */}
+
+
+
+
+
+
+      {/* <div className="bottmCircle">
+        <CircleComponent/>
+      </div> */}
+
+      <div className="main-bottom-container" style={{marginTop:'10px'}}>
         <div className="bottom-content">
-          <h1 style={{fontFamily:'Twentieth Century sans-serif'}}>Bold, Stylish & Confident</h1>
-          <p>Our collection features a range of stylish and versatile outfits perfect for any casual occasion. From breezy kurtas to comfy palazzos, each piece is crafted with care and attention to detail. We use high-quality fabrics that are breathable and easy to care for, ensuring that you look and feel your best all day long.</p>
+          <h1>Bold, Stylish & Confident</h1>
+          {/* <p>Our collection features a range of stylish and versatile outfits perfect for any casual occasion. From breezy kurtas to comfy palazzos, each piece is crafted with care and attention to detail. We use high-quality fabrics that are breathable and easy to care for, ensuring that you look and feel your best all day long.</p> */}
         </div>
       </div>
 

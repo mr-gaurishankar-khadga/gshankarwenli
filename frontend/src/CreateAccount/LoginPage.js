@@ -1,143 +1,140 @@
+// LoginPage.jsx
 import React, { useState } from 'react';
-import './LoginPage.css';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import img from './images/WENLI.svg'
-import { Box, IconButton, Avatar, Typography, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
-import { Dashboard, VideoLibrary, Analytics, Comment, Subtitles, Copyright, Settings, Feedback, People,ThumbDown,ThumbUp} from '@mui/icons-material';
-
+import { Github, Twitter, Facebook, Eye, EyeOff } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {jwtDecode} from 'jwt-decode'; 
-import { Link, useNavigate } from 'react-router-dom';
-
-
-
+import { jwtDecode } from 'jwt-decode';
 import ForgotPasswordModal from './ForgotPasswordModal';
-import Logo from './images/WENLI.svg';
-import Loginwithgoogle from './Loginwithgoogle';
+import './LoginPage.css';
+import google from './images/google.svg';
+
+import LoginWithGoogle from './Loginwithgoogle'
 
 const LoginPage = ({ setToken, setIsAdmin }) => {
     const [showPassword, setShowPassword] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false); 
-    
-    const togglePasswordVisibility = () => setShowPassword(!showPassword);
-
-    const openModal = () => setIsModalOpen(true); 
-    const closeModal = () => setIsModalOpen(false); 
-
-
-
-
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [credentials, setCredentials] = useState({ firstname: '', password: '' });
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials({ ...credentials, [name]: value });
-  };
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setCredentials({ ...credentials, [name]: value });
+    };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    try {
-      const { firstname, password } = credentials;
+        try {
+            const { firstname, password } = credentials;
 
-      // Admin access check
-      if (firstname === 'admin' && password === '1234') {
-        setIsAdmin(true);
-        navigate('/Setup');
-        return;
-      }
+            // Admin access check
+            if (firstname === 'admin' && password === '1234') {
+                setIsAdmin(true);
+                navigate('/Setup');
+                return;
+            }
 
-      // Authenticate with backend
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, { firstname, password });
+            // Authenticate with backend
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, { firstname, password });
+            const { token } = response.data;
 
-      const { token } = response.data;
+            // Decode the token
+            const decodedToken = jwtDecode(token);
 
-      // Decode the token
-      const decodedToken = jwtDecode(token);
+            setToken(token);
+            setIsAdmin(decodedToken.role === 'admin');
 
-      setToken(token);
-      setIsAdmin(decodedToken.role === 'admin');
+            // Navigate based on role
+            if (decodedToken.role === 'admin') {
+                navigate('/Setup');
+            } else {
+                navigate('/');
+            }
+        } catch (err) {
+            console.error('Login failed:', err);
+            alert('Login failed. Please check your credentials.');
+        }
+    };
 
-      // Navigate based on role
-      if (decodedToken.role === 'admin') {
-        navigate('/Setup');
-      } else {
-        navigate('/');
-      }
-    } catch (err) {
-      console.error('Login failed:', err);
-      alert('Login failed. Please check your credentials.');
-    }
-  };
+    const handleGoogleLogin = () => {
+        // Implement Google login logic
+        console.log('Google login clicked');
+    };
 
-
-
-
-
-
-
-
+    const handleSocialLogin = (platform) => {
+        // Implement social login logic
+        console.log(`${platform} login clicked`);
+    };
 
     return (
-        <div className="login-page">
-          {/* <img src={img} alt="" /> */}
-            <form onSubmit={handleSubmit}>
-            <div className="phone-frame">
-                <div className="login-container" >
-                    <img src={Logo} alt="" className="animated-logo" style={{marginTop:'-20px',height:'220px'}}/>
-                    <div className="information" >
-                        <h2 className="animated" style={{fontFamily:'Twentieth Century sans-serif'}}>Welcome To WENLI</h2>
-                        <p className="subheading animated-subheading" style={{textAlignLast:'center', marginTop:'', fontFamily:'Twentieth Century sans-serif'}}>Keep your data safe</p>
+        <div className="login-wrapper">
+            <div className="login-container">
+                <h2 className="login-title">Welcome Back!</h2>
+                <p className="login-subtitle">Please enter your details</p>
+                
+                <form onSubmit={handleSubmit} className="login-form">
+                    <div className="input-group">
+                        <input
+                            type="text"
+                            name="firstname"
+                            placeholder="Username"
+                            value={credentials.firstname}
+                            onChange={handleChange}
+                            className="login-input"
+                            required
+
+                            style={{width:'90%'}}
+                        />
                     </div>
 
-
-
-                    <div className="input-field animated-input">
-                      <input type="text"
-                          name="firstname"
-                          value={credentials.firstname}
-                          onChange={handleChange}
-                          required
-                          placeholder='Username'
-                      />
-                    </div>
-
-                    <div className="input-field animated-input">
+                    <div className="input-group password-group">
                         <input
                             type={showPassword ? "text" : "password"}
-                            placeholder="Password"
                             name="password"
+                            placeholder="Password"
                             value={credentials.password}
                             onChange={handleChange}
+                            className="login-input"
+                            required
+                            style={{width:'90%'}} 
                         />
-
-                        <span className="visibility-icon" onClick={togglePasswordVisibility}>
-                            {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                        </span>
+                        <button
+                            type="button"
+                            className="password-toggle"
+                            onClick={() => setShowPassword(!showPassword)}
+                        >
+                            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                        </button>
                     </div>
 
-                    <button className="login-button animated-button" >LOGIN</button>
-                      <Loginwithgoogle/>
+                    <button type="submit" className="login-button">
+                        Sign In
+                    </button>
 
-                    <div className="bothsignand" style={{display:'flex'}}>
 
-                    <p className="forgot-password animated-text" onClick={openModal}>Forgot password?</p> 
-                    
-                    <p className="register animated-text" style={{marginLeft:'15px'}}> <Link to="/Signup"> Create New Account </Link> </p> 
+                    <div className="dividerr">
+                        <span>or continue with</span>
                     </div>
 
+                    <div className="social-login">
+                       <LoginWithGoogle/>
+                    </div>
 
-                    {/* <p className="register animated-text">
-                        Don't have an account? 
-                    </p> */}
-                        
-                </div>
+                    <div className="login-footer">
+                        <button 
+                            type="button" 
+                            className="forgot-password" 
+                            onClick={() => setIsModalOpen(true)}
+                        >
+                            Forgot password?
+                        </button>
+                        <p className="signup-link">
+                            Don't have an account? <a href="/signup">Sign up</a>
+                        </p>
+                    </div>
+                </form>
             </div>
-            </form>
-            <ForgotPasswordModal isOpen={isModalOpen} onClose={closeModal} /> 
+            <ForgotPasswordModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </div>
     );
 };

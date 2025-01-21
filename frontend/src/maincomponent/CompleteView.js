@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+
 import './Completeview.css';
 import './ProductDetail.css';
+
 import FeatureSection from './FeatureSection';
 import ShoppingCart from './ShoppingCart';
 import { IconButton, Popover, Paper, Button } from '@mui/material';
@@ -117,6 +119,9 @@ const CompleteView = () => {
 
   return (
     <>
+      
+      
+      <p className='topheadingtitle'> Home / {product.title} </p>
       <div className="complete-view">
         <div className="leftsideview"></div>
 
@@ -140,45 +145,15 @@ const CompleteView = () => {
             </div>
 
 
-
-            <div className="product-info" style={{ marginTop: '10px', fontFamily:'ITC Benguiat'}}>
-            <h1 style={{ fontFamily: 'ITC Benguiat', color:'#121212' }}> {product.title} </h1>
-
-
-
-              <div className="price">
-                <span className="current-price">Rs.{product.price}</span>
-                <span className="discount" style={{ fontFamily: 'Twentieth Century sans-serif' }}>Save {product.discount}% right now</span>
+            <div className="product-info" style={{ marginTop: '10px'}}>
+              <p className='tag'> BOMBAY PAISLEY </p>
+              <p className='producttitle'> {product.title} </p>
+              <div className="prices-cmp">
+                <p className="current-price-cmp">₹.{product.price}  <span className='mrp'> MRP incl.of all taxes </span> </p>
+                {/* <span className="discount">Save {product.discount}% right now</span> */}
               </div>
+              <hr style={{opacity:'40%'}}/>
 
-
-
-
-
-              <div style={styles.giftcontainer}>
-                <p style={styles.taxText}>Tax included. <span style={styles.shippingText}>Shipping calculated at checkout.</span></p>
-                <div style={styles.offer}>
-                  <div style={styles.icon}> <CiGift style={{opacity:''}}/></div>
-                  <div>
-                    <p style={styles.titleset}>BUY 3 OVERSIZED TEES @1099</p>
-                    <p style={styles.descriptionset}>Add 3 tees in cart and checkout offer will be automatically applied</p>
-                  </div>
-                </div>
-                <div style={styles.offer}>
-                  <div style={styles.icon}> <CiGift/> </div>
-                  <div>
-                    <p style={styles.titleset}>BUY 3 SHIRTS AT 499 EACH</p>
-                    <p style={styles.descriptionset}>Offer will be applied automatically</p>
-                  </div>
-                </div>
-                <div style={styles.offer}>
-                  <div style={styles.icon}><CiGift/></div>
-                  <div>
-                    <p style={styles.titleset}>FLAT 30% OFF ON BOTTOM WEAR</p>
-                    <p style={styles.descriptionset}>Add code: <span style={styles.code}>MONSOON</span></p>
-                  </div>
-                </div>
-              </div>
 
 
 
@@ -199,51 +174,36 @@ const CompleteView = () => {
 
 
 
-                {/* <h4>Size <span style={{ textDecoration: 'underline',cursor:'pointer' }}> Chart </span></h4> */}
-              <div className="Size-optionx" style={{marginLeft:'5px',backgroundColor:''}}>
-                <div className="Size-optionsx" style={{width:'',backgroundColor:'',maxWidth:''}}>
+              <p className='sizetap' style={{opacity:'70%'}}>Size <span style={{ textDecoration: 'underline',cursor:'pointer' }}> Chart </span></p>
+              <div className="Size-optionx">
+                <div className="Size-optionsx">
                   {product.sizes.map((size, index) => (
-                    <button key={index} className={`sizex ${size}`} style={{padding:'10px 25px',justifyContent:'space-around',marginLeft:'5px'}}>{size}</button>
+                    <button key={index} className={`sizex ${size}`} style={{padding:'10px 20px',justifyContent:'space-around',marginLeft:''}}>{size}</button>
                   ))}
                 </div>
 
 
 
-                <div className="selectitem" style={{backgroundColor:'',width:'95%'}}>
+                {/* <div className="selectitem" style={{backgroundColor:'',width:'95%'}}>
                   <select name="quantity" id="quantity" onChange={handleQuantityChange} value={quantity} style={{backgroundColor:''}}>
                     {[1, 2, 3, 4, 5].map((q) => (
                       <option key={q} value={q}>  {q}  </option>
                     ))}
                   </select>
-                </div>
+                </div> */}
               </div>
 
 
 
 
 
-              <div className="action-buttons" style={{maxWidth:'400px',display:'block',margin:'',height:''}}>
-                <Button 
-                  onClick={handleAddToCart} 
-                  style={{
-                    backgroundColor: 'rgb(251, 100, 27)',
-                    color: 'white',
-                    padding: '10px 20px',
-                    fontSize: '18px',
-                    fontWeight: '',
-                    textTransform: 'none',
-                    borderRadius: '5px',
-                    transition: 'transform 0.3s ease-in-out',
-                    marginRight: '10px',
-                    width:'315px',
-                    maxWidth:'350px',
-                    background:'rgb(18,18,18)',
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                  onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                >
+              <div className="action-buttons" style={{maxWidth:'540px',display:'',margin:'',height:''}}>
+                <button 
+                  className='add-to-cart-btn-cmp'
+                    onClick={handleAddToCart} 
+                  >
                   Add to Cart
-                </Button>
+                </button>
 
 
 
@@ -271,6 +231,8 @@ const CompleteView = () => {
                 >
                   Like
                 </Button> */}
+
+
 
                 <Popover
                   className='mypover'
@@ -300,26 +262,9 @@ const CompleteView = () => {
 
 
 
-                <Button 
-                  onClick={handleBuyNow}
-                  style={{
-                    backgroundColor: 'rgb(52, 215, 57)',
-                    color: 'white',
-                    padding: '10px 20px',
-                    fontSize: '18px',
-                    fontWeight: '',
-                    textTransform: 'none',
-                    borderRadius: '5px',
-                    transition: 'transform 0.3s ease-in-out',
-                    width:'315px',
-                    maxWidth:'350px',
-                    marginTop:'10px',
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                  onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                >
-                  Buy Now
-                </Button>
+                <button  onClick={handleBuyNow} className='buynow-cmp' > Buy Now </button>
+
+
               </div>
 
 
@@ -332,9 +277,9 @@ const CompleteView = () => {
 
               {/* Product Features */}
               <div className="features" style={{ marginTop: '20px' }}>
-                <h4 style={{ fontFamily: 'Twentieth Century sans-serif' }}>Features</h4>
+                <h4>Features</h4>
                 <ul>
-                  <li style={{ paddingRight: '20px', letterSpacing: '2px' }}>{product.description}</li>
+                  <li style={{ paddingRight: '20px'}}>{product.description}</li>
                 </ul>
               </div>
 
@@ -343,25 +288,25 @@ const CompleteView = () => {
 
 
               <div className="features" style={{ marginTop: '10px' }}>
-                <h4 style={{ fontFamily: 'Twentieth Century sans-serif' }}> Size & Fit  </h4>
+                <h4> Size & Fit  </h4>
                 <ul>
-                  <li style={{ paddingRight: '20px', letterSpacing: '2px' }}>   {product.minitext1}</li>
+                  <li style={{ paddingRight: '20px'}}>   {product.minitext1}</li>
                 </ul>
 
                 <ul>
-                  <li style={{ paddingRight: '20px', letterSpacing: '2px' }}>   {product.minitext2}</li>
+                  <li style={{ paddingRight: '20px'}}>   {product.minitext2}</li>
                 </ul>
 
-                <h4 style={{ fontFamily: 'Twentieth Century sans-serif' }}> Wash Care  </h4>
+                <h4> Wash Care  </h4>
                 <ul>
-                  <li style={{ paddingRight: '20px', letterSpacing: '2px' }}>   {product.minitext3}</li>
+                  <li style={{ paddingRight: '20px'}}>   {product.minitext3}</li>
                 </ul>
 
                 <ul>
-                  <li style={{ paddingRight: '20px', letterSpacing: '2px' }}>  {product.minitext4}</li>
+                  <li style={{ paddingRight: '20px'}}>  {product.minitext4}</li>
                 </ul>
 
-                <h4 style={{ fontFamily: 'Twentieth Century sans-serif' }}> Specifications  </h4>
+                <h4> Specifications  </h4>
                 <ul>
                   <li style={{ paddingRight: '20px', letterSpacing: '2px' }}>  {product.minitext5}</li>
                 </ul>
@@ -371,7 +316,7 @@ const CompleteView = () => {
                 </ul>
 
 
-                <h4 style={{ fontFamily: 'Twentieth Century sans-serif' }}> Notes:   </h4>
+                <h4> Notes:   </h4>
 
               </div>
             </div>
@@ -400,53 +345,6 @@ const CompleteView = () => {
       {/* <ProductGrid/> */}
     </>
   );
-};
-
-
-
-const styles = {
-  giftcontainer: {
-    fontFamily: 'Arial, sans-serif',
-    fontSize: '14px',
-    color: '#000',
-    lineHeight: '24.4px',
-  },
-  taxText: {
-    marginTop:'20px',
-    marginBottom: '20px',
-    fontSize:'15px',
-  },
-  shippingText: {
-    color: '#555',
-    fontFamily:'Assistant (woff2) sans-serif',
-    fontSize:'15px'
-  },
-  offer: {
-    display: 'flex',
-    alignItems: 'center',
-    marginBottom: '16px',
-  },
-  icon: {
-    fontSize: '45px',
-    marginRight: '10px',
-    maxWidth:'50px',
-    marginTop:'-10px',
-    opacity:'80%'
-  },
-  titleset: {
-    fontWeight: 'bold',
-    margin: '0',
-    fontSize:'10.8px'
-  },
-  descriptionset: {
-    margin: '0',
-    color: '#555',
-    marginTop:'-7px',
-    fontSize:'9px'
-  },
-  code: {
-    fontWeight: 'bold',
-  },
 };
 
 export default CompleteView;
