@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation,useNavigate } from 'react-router-dom';
 import QRCode from 'qrcode.react';
-import {MapPin, SendHorizontal} from 'lucide-react'
+import {Building, MapPin, SendHorizontal} from 'lucide-react'
 import './Payment.css';
 import './PaymentSelector.css';
 
@@ -14,17 +14,29 @@ import { ToastContainer, toast } from 'react-toastify';
 const Payment = () => {
   const location = useLocation();
   const { product, quantity } = location.state || {};
-  const [paymentMethod, setPaymentMethod] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('COD');
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCvv] = useState('');
   const [address, setAddress] = useState('');
+
+  const [secAddress, setsecAddress] = useState('');
+  const [pincode, setPincode] = useState('');
+  const [building, setBuilding] = useState('');
+
+  const [addressError, setAddressError] = useState('');
+  const [pincodeError, setPincodeError] = useState('');
+  const [buildingError, setBuildingError] = useState('');
+
+
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [emailError, setEmailError] = useState('');
   const [nameError, setNameError] = useState('');
+
   const [phoneError, setPhoneError] = useState('');
+
   const [showNotification, setShowNotification] = useState(false);
   const [userLocation, setUserLocation] = useState('');
   const [otp, setOtp] = useState('');
@@ -92,6 +104,41 @@ const Payment = () => {
     return true;
   };
 
+
+
+
+
+  const validateAddress = (value) => {
+    if (value.length < 5) {
+      setAddressError('Address must be at least 5 characters long');
+    } else {
+      setAddressError('');
+    }
+  };
+  
+  const validatePincode = (value) => {
+    const pincodeRegex = /^\d{6}$/;  
+    if (!pincodeRegex.test(value)) {
+      setPincodeError('Please enter a valid 6-digit pincode');
+    } else {
+      setPincodeError('');
+    }
+  };
+  
+  const validateBuilding = (value) => {
+    if (value.trim() === '') {
+      setBuildingError('Building name cannot be empty');
+    } else {
+      setBuildingError('');
+    }
+  };
+
+
+
+
+
+
+
   // Email validation
   const validateEmail = (value) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -131,6 +178,27 @@ const Payment = () => {
     validateName(value);
   };
 
+
+  const handlesecAddressChange = (e) => {
+  const value = e.target.value;
+  setsecAddress(value);
+  validateAddress(value);
+};
+
+const handlepincodeChange = (e) => {
+  const value = e.target.value;
+  setPincode(value);
+  validatePincode(value);
+};
+
+const handlebuildingChange = (e) => {
+  const value = e.target.value;
+  setBuilding(value);
+  validateBuilding(value);
+};
+
+
+
   const handlePhoneChange = (e) => {
     const value = e.target.value.replace(/\D/g, '').slice(0, 10);
     setPhone(value);
@@ -142,6 +210,13 @@ const Payment = () => {
     setEmail(value);
     validateEmail(value);
   };
+
+
+
+
+
+
+
 
   // Location handlers
   const fetchHumanReadableAddress = async (latitude, longitude) => {
@@ -183,7 +258,7 @@ const Payment = () => {
 
     setIsLoading(true);
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/payments/send-payment-otp`, {
+      const response = await fetch('https://wenliecommerce.onrender.com/api/payments/send-payment-otp', {
 
         method: 'POST',
         headers: {
@@ -220,7 +295,7 @@ const Payment = () => {
 
     setIsLoading(true);
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/payments/verify-payment-otp`, {
+      const response = await fetch('https://wenliecommerce.onrender.com/api/payments/verify-payment-otp', {
 
         method: 'POST',
         headers: {
@@ -283,15 +358,15 @@ const Payment = () => {
 
 
 
-    if (!address || !email || !name || !phone) {
-      alert('Please fill in all required fields.');
-      return;
-    }
+    // if (!address || !email || !name || !phone || !secAddress || !pincode || building) {
+    //   alert('Please fill in all required fields.');
+    //   return;
+    // }
 
-    if (!validateEmail(email) || !validateName(name) || !validatePhone(phone)) {
-      alert('Please correct the errors in the form.');
-      return;
-    }
+    // if (!validateEmail(email) || !validateName(name) || !validatePhone(phone)) {
+    //   alert('Please correct the errors in the form.');
+    //   return;
+    // }
     
     if (!otpVerified) {
       alert('Please verify your email OTP before proceeding with payment.');
@@ -308,13 +383,16 @@ const Payment = () => {
       email,
       name,
       phone,
+      secAddress,
+      pincode,
+      building,
       cardNumber: paymentMethod === 'Card Payment' ? cardNumber : undefined,
       expiryDate: paymentMethod === 'Card Payment' ? expiryDate : undefined,
       cvv: paymentMethod === 'Card Payment' ? cvv : undefined,
     };
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/payments`, {
+      const response = await fetch('https://wenliecommerce.onrender.com/api/payments', {
 
         method: 'POST',
         headers: {
@@ -407,10 +485,18 @@ const Payment = () => {
     return <p className="no-product">No product selected.</p>;
   }
 
+
   return (
+
+    <>
     <div className="mainpaymentcontainer" style={{display:'flex',justifyContent:'center'}}>
       <div className="payment-container">
         <div className="payment-view">
+
+
+
+
+          
           
           
           
@@ -475,81 +561,37 @@ const Payment = () => {
 
 
 
-            {/* <div className={`payment-option ${paymentMethod === 'COD' ? 'selected' : ''}`} style={{border:'1px solid rgb(0,168,107)'}}>
-              <input
-                type="radio"
-                id="cod"
-                name="payment-method"
-                value="COD"
-                onChange={handlePaymentMethodChange}
-              />
-              <label htmlFor="cod" style={{fontSize:'15px',}}>COD</label>
-            </div> */}
-          
 
-          {/* <h3 className="payment-method-title" style={{fontSize:'',color:'rgb(0,168,107)'}}>Select Payment Method</h3>
-          <div className="payment-methods">
-            <div className={`payment-option ${paymentMethod === 'Card Payment' ? 'selected' : ''}`}>
-              <input
-                type="radio"
-                id="card"
-                name="payment-method"
-                value="Card Payment"
-                onChange={handlePaymentMethodChange}
-              />
-              <label htmlFor="card" style={{fontSize:'15px'}}>Card</label>
-            </div>
+
+
+
+
+
+
+
+          <div className={`payment-option ${paymentMethod === 'COD' ? 'selected' : ''}`} style={{border:'1px solid rgb(18,18,18)', justifyContent:'center', marginLeft:'30px',maxWidth:'100px'}}>
+            <input
+              type="radio"
+              id="cod"
+              name="payment-method"
+              value="COD"
+              checked={paymentMethod === 'COD'}  
+              onChange={handlePaymentMethodChange}
+              style={{display:'none'}}
+            />
+            <label htmlFor="cod" style={{fontSize:'15px',textAlign:'center'}}>
+              COD
+            </label>
           </div>
 
-          {paymentMethod === 'Card Payment' && (
-            <div className="card-details">
-              <h3 className="card-details-title">Enter Card Details</h3>
-              <div className="card-details-row">
-                <label>Card Number</label>
-                <input
-                  type="text"
-                  value={cardNumber}
-                  onChange={(e) => formatCardNumber(e.target.value)}
-                  placeholder="1234 5678 9012 3456"
-                />
-                {!validateCardNumber(cardNumber) && cardNumber && (
-                  <span className="error">Invalid card number</span>
-                )}
-              </div>
-              <div className="card-details-row">
-                <label>Expiry Date</label>
-                <input
-                  type="text"
-                  value={expiryDate}
-                  onChange={(e) => formatExpiryDate(e.target.value)}
-                  placeholder="MM/YY"
-                />
-              </div>
-              <div className="card-details-row">
-                <label>CVV</label>
-                <input
-                  type="password"
-                  value={cvv}
-                  onChange={(e) => formatCvv(e.target.value)}
-                  placeholder="123"
-                />
-              </div>
-            </div>
-          )} */}
 
 
 
+            
 
-
-
-
-
-
-
-
+{/* 
         <div className="payment-selector">
           <h3 className="payment-method-title">Select Payment Method</h3>
-          {/* Desktop View */}
           <div className="desktop-view">
             {paymentMethods.map((method) => (
               <button
@@ -564,7 +606,7 @@ const Payment = () => {
             ))}
           </div>
 
-          {/* Mobile View */}
+
           <div className="mobile-view">
             <button className="dropdown-toggle" onClick={toggleDropdown} style={{border: '1px solid #1a1a1a'}}>
               {paymentMethods.find(m => m.id === selectedMethod)?.logo}
@@ -590,7 +632,7 @@ const Payment = () => {
               </div>
             )}
           </div>
-        </div>
+        </div> */}
 
 
 
@@ -616,6 +658,11 @@ const Payment = () => {
 
         {/* //another componet of this form  */}
         <div className="form-container">
+
+
+
+
+
           <div className="input-group">
             <input
               type="text"
@@ -629,6 +676,8 @@ const Payment = () => {
             <label htmlFor="name" className="input-label" >Full Name</label>
             {nameError && <span className="error-text">{nameError}</span>}
           </div>
+
+
 
           <div className="input-group">
             <input
@@ -644,7 +693,9 @@ const Payment = () => {
             {phoneError && <span className="error-text">{phoneError}</span>}
           </div>
 
+
           <div className="input-group">
+
             <div className="address-group">
               <input
                 type="text"
@@ -665,7 +716,67 @@ const Payment = () => {
                 <MapPin />
               </button>
             </div>
+
+            
+
+
+
+
+
+
+
+            <div className="input-group" style={{marginTop:'20px'}}>
+                <input
+                  type="text"
+                  id="secAddress"
+                  value={secAddress}
+                  onChange={handlesecAddressChange}
+                  placeholder=" "
+                  required
+                  style={{width:'95%'}}
+                />
+                <label htmlFor="secAddress" className="input-label" style={{marginTop:'1px'}}>Second Address</label>
+              </div>
+
+              <div className="form-container">
+                <div className="input-group">
+                  <input
+                    type="text"
+                    id="pincode"
+                    value={pincode}
+                    onChange={handlepincodeChange}
+                    placeholder=" "
+                    required
+                    style={{width:'95%'}}
+                  />
+                  <label htmlFor="pincode" className="input-label" style={{marginTop:'1px'}}>Pincode</label>
+                </div>
+              </div>
+
+              <div className="form-container">
+                <div className="input-group">
+                  <input
+                    type="text"
+                    id="building"
+                    value={building}
+                    onChange={handlebuildingChange}
+                    placeholder=" "
+                    required
+                    style={{width:'95%'}}
+                    
+                  />
+                  <label htmlFor="building" className="input-label" style={{marginTop:'1px'}}>Building</label>
+                </div>
+              </div>
+
+
+
+
+
           </div>
+
+
+
 
 
 
@@ -682,9 +793,10 @@ const Payment = () => {
                   className={`form-input ${emailError ? 'input-error' : email ? 'input-success' : ''}`}
                   placeholder=" "
                   required
-                  style={{width:''}}
+                  style={{width:'95%',paddingLeft:'20px'}}
+                 
                 />
-                <label htmlFor="email" className="input-label">Email Address</label>
+                <label htmlFor="email" className="input-label" style={{paddingLeft:'20px'}}>Email Address</label>
               </div>
               <button 
                 type="button"
@@ -697,6 +809,9 @@ const Payment = () => {
             </div>
             {emailError && <span className="error-text">{emailError}</span>}
           </div>
+
+
+
         </div>
 
 
@@ -715,18 +830,20 @@ const Payment = () => {
           {otpSent && !otpVerified && (
             <>
               <label>Enter OTP:</label>
-              <div className="otp-popup" style={{display:'flex',justifyContent:'center'}}>
+              <div className="otp-popup" style={{display:'flex',justifyContent:'center',width:'100%'}}>
                 <input
                   type="text"
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
                   placeholder="Enter OTP"
+                  style={{maxWidth:'70%'}}
                 />
                 <button 
                   type="button"
                   onClick={handleVerifyOtp}
                   disabled={isLoading || !otp}
                   style={{
+                    maxWidth:'30%',
                     opacity: (isLoading || !otp) ? 0.7 : 1,
                     cursor: (isLoading || !otp) ? 'not-allowed' : 'pointer'
                   }}
@@ -762,6 +879,7 @@ const Payment = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

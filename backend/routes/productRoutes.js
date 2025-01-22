@@ -34,8 +34,27 @@ router.post('/', upload.fields([
       brand_name, 
       hsn_code, 
       sku, 
-      weight,
-      dimensions,
+      weight1,
+      
+      height,
+      width2,
+      length,
+      unit,
+
+      //third
+      stock_quantity,
+      low_stock_threshold,
+
+      //four
+      package_dimensionslength,
+      package_dimensionsheight,
+      package_dimensionswidth,
+      shipping_mode,
+      origin_pincode,
+      pickup_location,
+      gst_percentage,
+      status,
+
     } = req.body;
 
     const frontImage = req.files['front'] ? req.files['front'][0].path : null;
@@ -62,16 +81,31 @@ router.post('/', upload.fields([
       backImage,
       extraImage1,
       extraImage2,
+
       sku,
-      weight,
+      weight1,
       hsn_code,
       brand_name,
-      dimensions: {
-        length: dimensions.length,
-        width: dimensions.width,
-        height: dimensions.height,
-        unit: dimensions.unit || 'cm'
-      }
+
+      length,
+      width2,
+      height,
+      unit,
+
+      //third
+      stock_quantity,
+      low_stock_threshold,
+
+      //fourth
+      package_dimensionslength,
+      package_dimensionsheight,
+      package_dimensionswidth,
+      shipping_mode,
+      origin_pincode,
+      pickup_location,
+      gst_percentage,
+      status
+
     });
 
     await newProduct.save();
@@ -119,8 +153,29 @@ router.put('/:id', upload.fields([
       brand_name, 
       hsn_code, 
       sku, 
-      weight,
-      dimensions ,
+
+      weight1,
+      length,
+      width2,
+      height,
+      unit,
+
+      //third
+      stock_quantity,
+      low_stock_threshold,
+
+
+      //fourth
+
+      package_dimensionslength,
+      package_dimensionsheight,
+      package_dimensionswidth,
+      shipping_mode,
+      origin_pincode,
+      pickup_location,
+      gst_percentage,
+      status
+
 
     } = req.body;
 
@@ -150,16 +205,32 @@ router.put('/:id', upload.fields([
         backImage,
         extraImage1,
         extraImage2,
+
+
         sku,
-        weight,
+        weight1,
         hsn_code,
         brand_name,
-        dimensions: {
-          length: dimensions.length,
-          width: dimensions.width,
-          height: dimensions.height,
-          unit: dimensions.unit || 'cm'
-        }
+
+        length,
+        width2,
+        height,
+        unit,
+
+        //third 
+        stock_quantity,
+        low_stock_threshold,
+
+
+        //fourth
+        package_dimensionslength,
+        package_dimensionsheight,
+        package_dimensionswidth,
+        shipping_mode,
+        origin_pincode,
+        pickup_location,
+        gst_percentage,
+        status
       },
       { new: true }
     );

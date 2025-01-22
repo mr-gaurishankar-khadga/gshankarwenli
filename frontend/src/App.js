@@ -68,6 +68,7 @@ import { ShoppingCart as LucidShoppingCart } from 'lucide-react';
 
 import { AlignJustify as LucidMenuIcon } from 'lucide-react';
 import PaymentSelector from './maincomponent/PaymentSelector';
+import CashFree from './Cashfree';
 
 
 
@@ -390,6 +391,7 @@ const App = () => {
           <Route path ="CirlceComponent" element={<CircleComponent/>}/>
           <Route path ="BottomBar" element={<BottomBar/>}/>
           <Route path ="CustomerReviews" element={<CustomerReviews/>}/>
+          <Route path ="Cashfree" element={<CashFree/>}/>
 
           
           

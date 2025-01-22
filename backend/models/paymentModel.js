@@ -22,17 +22,33 @@
 const mongoose = require('mongoose');
 
 const paymentSchema = new mongoose.Schema({
-  product: { type: Object, required: true },
-  quantity: { type: Number, required: true },
-  paymentMethod: { type: String, required: true },
-  price: { type: Number, required: true },
-  cardNumber: String,
-  expiryDate: String,
-  cvv: String,
-  address: { type: String, required: true },
-  email: { type: String, required: true },
-  name:{ type: String, required: true },
-  phone:{ type: Number, required: true },
+
+  product: { type: Object },
+
+  quantity: { type: Number},
+
+  paymentMethod: { type: String },
+
+  price: { type: Number},
+
+  cardNumber: { type:String },
+
+  expiryDate: { type:String },
+
+  cvv: { type:String },
+
+  address: { type: String },
+  secAddress: { type: String },
+  pincode: { type: String },
+  buiding:{ type:String },
+
+  email: { type: String},
+
+  name:{ type: String},
+
+  phone:{ type: Number},
+
+
   timestamp: { type: Date, default: Date.now }
 });
 

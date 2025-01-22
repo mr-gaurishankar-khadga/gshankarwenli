@@ -25,8 +25,7 @@ transporter.verify((error, success) => {
 
 
 router.post('/', async (req, res) => {
-  const { product, quantity, paymentMethod, price, cardNumber, address, expiryDate, cvv, email,name,phone } = req.body;
-
+  const { product, quantity, paymentMethod, price, cardNumber, address, expiryDate, cvv, email,name,phone,secAddress, pincode, buiding } = req.body;
   try {
     const newPayment = new Payment({
       product,
@@ -39,6 +38,11 @@ router.post('/', async (req, res) => {
       email,
       name,
       phone,
+
+      secAddress,
+      pincode,
+      buiding,
+
       cvv,
     });
 

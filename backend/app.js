@@ -17,12 +17,15 @@ const userRoutes = require('./routes/userRoutes');
 const messageRoutes = require('./routes/messageRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 
+const { createOrder } = require('./cashfree');
+
+// const paymentRoutesDone = require('./paymentdone');
 
 const app = express();
 
 
 const corsOptions = {
-  origin: process.env.CLIENT_URL,
+  origin: 'https://wenli.netlify.app/',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -55,7 +58,6 @@ const connectDB = async () => {
     console.log('MongoDB connected successfully');
   } catch (err) {
     console.error('MongoDB connection error:', err);
- 
     setTimeout(connectDB, 5000);
   }
 };
@@ -115,6 +117,24 @@ app.use('/api/users', userRoutes);
 app.use('/', messageRoutes);
 app.use('/api/reviews', reviewRoutes);
 
+// app.use('/api/payments', paymentRoutesDone);
+
+
+
+
+
+app.post('/api/create-order', async (req, res) => {
+  try {
+    const orderResponse = await createOrder(req.body);
+    res.json(orderResponse);
+  } catch (error) {
+    console.error('Payment Error:', error.details);
+    res.status(500).json({ 
+      error: error.message,
+      details: error.details 
+    });
+  }
+});
 
 
 

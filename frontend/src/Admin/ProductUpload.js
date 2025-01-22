@@ -72,10 +72,25 @@ const ProductUpload = () => {
     minitext5: '',
     minitext6: '',
 
+
+    //new 
     brand_name:'',
     hsn_code:'',
     sku:'',
-    weight:'',
+    weight1:'',
+
+
+    //second
+      length : '',
+      width2: '',
+      height: '',
+      unit: '',
+
+      //third
+      stock_quantity:'',
+      low_stock_threshold:'',
+
+
 
     title: '',
     price: '',
@@ -144,8 +159,23 @@ const ProductUpload = () => {
       formData.brand_name &&
       formData.hsn_code &&
       formData.sku &&
-      formData.weight &&
+      formData.weight1 &&
       //end
+
+
+
+      //second
+      formData.length &&
+      formData.width2 &&
+      formData.unit &&
+      formData.height &&
+
+      //third
+      formData.stock_quantity &&
+      formData.low_stock_threshold &&
+
+
+
 
       formData.price &&
       formData.categories &&
@@ -204,7 +234,22 @@ const ProductUpload = () => {
         brand_name:'',
         hsn_code:'',
         sku:'',
-        weight:'',
+        weight1:'',
+
+
+        //second
+          length:'',
+          width2:'',
+          height:'',
+          unit:'',
+
+
+        //third
+        stock_quantity:'',
+        low_stock_threshold:'',
+  
+
+
       });
       setSelectedImages({
         front: null,
@@ -342,10 +387,10 @@ const ProductUpload = () => {
           
           
           <div className="styled-animated-input">
-            <label>WEIGHT</label>
+            <label>WEIGHT1</label>
             <textarea
-              name="weight"
-              value={formData.weight}
+              name="weight1"
+              value={formData.weight1}
               onChange={handleChange}
               required
             ></textarea>
@@ -377,6 +422,10 @@ const ProductUpload = () => {
               onChange={handleChange}
               required
             ></textarea>
+
+
+
+
           </div>
 
 
@@ -414,6 +463,183 @@ const ProductUpload = () => {
             required
           />
         </div>
+
+
+
+        
+      
+        <div className="styled-animated-input">
+          <label>Dimension</label>
+          <label>length</label>
+          <input
+            type="number"
+            name="length"
+            value={formData.length}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="styled-animated-input">
+          <label>width of product </label>
+          <input
+            type="number"
+            name="width2"
+            value={formData.width2}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+
+        <div className="styled-animated-input">
+          <label>height</label>
+          <input
+            type="number"
+            name="height"
+            value={formData.height}
+            onChange={handleChange}
+            required
+          />
+
+          <label>unit</label>
+          <input
+            type="number"
+            name="unit"
+            value={formData.unit}
+            onChange={handleChange}
+            required
+          />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <label>stock_quantity</label>
+          <input
+            type="number"
+            name="stock_quantity"
+            value={formData.stock_quantity}
+            onChange={handleChange}
+            required
+          />
+
+          <label>low_stock_threshold</label>
+          <input
+            type="number"
+            name="low_stock_threshold"
+            value={formData.low_stock_threshold}
+            onChange={handleChange}
+            required
+          />
+
+
+
+
+
+          <label>Package Dimensions Length</label>
+          <input
+            type="number"
+            name="package_dimensionslength"
+            value={formData.package_dimensionslength}
+            onChange={handleChange}
+            required
+          />
+
+          <label>Package Dimensions Height</label>
+          <input
+            type="number"
+            name="package_dimensionsheight"
+            value={formData.package_dimensionsheight}
+            onChange={handleChange}
+            required
+          />
+
+          <label>Package Dimensions Width</label>
+          <input
+            type="number"
+            name="package_dimensionswidth"
+            value={formData.package_dimensionswidth}
+            onChange={handleChange}
+            required
+          />
+
+          <label>Shipping Mode</label>
+          <input
+            type="text"
+            name="shipping_mode"
+            value={formData.shipping_mode}
+            onChange={handleChange}
+            required
+          />
+
+          <label>Origin Pincode</label>
+          <input
+            type="text"
+            name="origin_pincode"
+            value={formData.origin_pincode}
+            onChange={handleChange}
+            required
+          />
+
+          <label>Pickup Location</label>
+          <input
+            type="text"
+            name="pickup_location"
+            value={formData.pickup_location}
+            onChange={handleChange}
+            required
+          />
+
+          <label>GST Percentage</label>
+          <input
+            type="number"
+            name="gst_percentage"
+            value={formData.gst_percentage}
+            onChange={handleChange}
+            required
+          />
+
+          <label>Status</label>
+          <input
+            type="text"
+            name="status"
+            value={formData.status}
+            onChange={handleChange}
+            required
+          />
+
+        
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <CategorySelect
           value={formData.categories}
